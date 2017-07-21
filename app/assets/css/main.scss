@@ -1,1 +1,17 @@
 @import 'root';
+
+.posts-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pull-left span {
+  margin-right: 10px;
+}
+
+.tags-title {
+  font-weight: 700;
+}
+
+

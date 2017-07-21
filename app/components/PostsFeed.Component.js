@@ -1,42 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import postService from '../services/postService';
-import PostPreview from './PostPreview';
+import PostPreview from './PostPreview.Component';
+import Pager from './Pager.Component';
 import { setPosts } from '../actions/actionCreators';
 
 
 class PostsFeed extends Component {
     constructor() {
         super();
-        this.state =  {posts: []} ;
-        this.onPostNew();
-
+        //this.state =  {posts: []} ;
+        this.onPosts();
+        this.firstPost = 3;
+        this.lastPost = 5;
     }
-  // getPosts() {
-  //       fetch(url)
-  //           .then(res => {
-  //               if (res.ok) {
-  //                   console.log(res)
-  //                   return res;
-  //               }
-  //               throw new Error("No data!")
-  //           })
-  //       console.log("In PostService")
-  //   }
 
-    onPostNew () {
-            postService
-                .getPosts()
-                .then( (response) =>  this.props.setPosts(response.posts))
-                //(  this.onPosts.bind(this))
+
+    onPosts () {
+        postService
+            .getPosts()
+            .then( (response) => {return this.postSorting(response.posts)} )
+            .then( (postToRepresent) =>  this.props.setPosts(postToRepresent))
+      //(response) =>  this.props.setPosts(response.posts))
+    }
+
+    postSorting(posts) {
+        let postToRepresent = [];
+
+        for (let i = this.firstPost; i <= this.lastPost; i++) {
+            postToRepresent.push(posts[i]);
         }
-
-    onPosts(posts) {
-        // this.setState ({
-        //     posts: posts
-        // } )
-      this.props.setPosts(posts)
+        this.firstPost = this.firstPost +3;
+        this.lastPost = this.lastPost +3;
+        return postToRepresent;
     }
+
 
     renderPreview(post, i) {
         return <li key={i}>
@@ -48,14 +46,13 @@ class PostsFeed extends Component {
         return(
             <section className="col-md-8">
                 <h2 className="page-header">Showing
-                    <span> 7 </span>
+                    <span> {this.props.match.params.page} </span>
                     posts
                 </h2>
-                <ul>
-                  {console.log(this.props.posts)}
+                <ul className="posts-list">
                     {this.props.posts.map( this.renderPreview.bind(this) )}
                 </ul>
-
+                <Pager/>
             </section>
         )
     }
