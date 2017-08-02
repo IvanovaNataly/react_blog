@@ -46,13 +46,13 @@ class PostsFeed extends Component {
         return(
             <section className="col-md-8">
                 <h2 className="page-header">Showing
-                    <span> {this.props.match.params.page} </span>
+                    {/*<span> {this.props.match.params.page} </span>*/}
                     posts
                 </h2>
                 <ul className="posts-list">
                     {this.props.posts.map( this.renderPreview.bind(this) )}
                 </ul>
-                <Pager/>
+                {/*<Pager/>*/}
             </section>
         )
     }
