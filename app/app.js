@@ -10,23 +10,15 @@ import store from "./store";
 import { BrowserRouter } from "react-router-dom";
 
 import Root  from './components/root';
-//
-// ReactDOM.render(
-//
-//     <Provider store={store}>
-//         <BrowserRouter>
-//             <Root />
-//         </BrowserRouter>
-//     </Provider>,
-//
-//   document.querySelector('#root')
-// );
+
 
 
 ReactDOM.render(
 
   <Provider store={store}>
+    <BrowserRouter>
       <Root />
+    </BrowserRouter>
   </Provider>,
 
   document.querySelector('#root')

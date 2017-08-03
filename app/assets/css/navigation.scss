@@ -1,20 +1,3 @@
-@import 'root';
-
-.posts-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.pull-left span {
-  margin-right: 10px;
-}
-
-.tags-title {
-  font-weight: 700;
-}
-
-//Navigation
 li>a.active {
   background-image: -webkit-linear-gradient(top,#080808 0,#0f0f0f 100%);
   background-image: -o-linear-gradient(top,#080808 0,#0f0f0f 100%);
@@ -25,4 +8,3 @@ li>a.active {
   -webkit-box-shadow: inset 0 3px 9px rgba(0,0,0,.25);
   box-shadow: inset 0 3px 9px rgba(0,0,0,.25);
 }
-

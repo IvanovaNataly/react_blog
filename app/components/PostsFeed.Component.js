@@ -11,8 +11,8 @@ class PostsFeed extends Component {
         super();
         //this.state =  {posts: []} ;
         this.onPosts();
-        this.firstPost = 3;
-        this.lastPost = 5;
+        this.firstPost = 0;
+        this.lastPost = 7;
     }
 
 
@@ -46,13 +46,14 @@ class PostsFeed extends Component {
         return(
             <section className="col-md-8">
                 <h2 className="page-header">Showing
-                    {/*<span> {this.props.match.params.page} </span>*/}
+                  {console.log(this.props.match.params.page)}
+                    <span> {this.props.match.params.page} </span>
                     posts
                 </h2>
                 <ul className="posts-list">
                     {this.props.posts.map( this.renderPreview.bind(this) )}
                 </ul>
-                {/*<Pager/>*/}
+                <Pager/>
             </section>
         )
     }
