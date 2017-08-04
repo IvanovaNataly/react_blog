@@ -13,7 +13,7 @@ export default class Navigation extends Component {
           <div className="navbar-header">
             <button type="button" className="navbar-toggle">
               <span className="sr-only">Toggle navigation</span>
-              <label for="toggle-nav-mobile">
+              <label >
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>

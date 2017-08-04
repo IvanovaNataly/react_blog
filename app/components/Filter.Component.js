@@ -3,31 +3,57 @@ import { connect } from "react-redux";
 
 class Filter extends Component {
 
+  filterCount(arr) {
+    return arr.reduce(function (prev, next) {
+      prev[next] = (prev[next] + 1) || 1;
+      return prev;
+    }, {});
+  }
+
   filterTags() {
-    let filters = [];
-    if(this.props.posts) {
-      //let post = this.props.posts[0];
-      let filt = [];
+    if(this.props.posts.length > 0) {
+      let filter = [];
       this.props.posts.map( post => {
-        console.log(post)
-        post.tags.filter(tagit, i => {
-
-          if (!filt[i].tag == tagit) {
-            filt.push({tag});
-          }
-          else {
-            let objCount = filt.find(obj => {
-              obj.tag == tag;
-            });
-            objCount.count =+1;
-          }
-
-        })
-
+          post.tags.map (tag => {
+            filter.push(tag);
+          })
       })
-      console.log(filt)
+
+      let filterObj = this.filterCount(filter);
+
+      let objToRepresent = Object.keys(filterObj).map((key, i) => {
+         return (
+           <a href="#" className="list-group-item" key={i}>
+             <span className="badge">{filterObj[key]}</span>
+             {key}
+           </a>
+         )
+      })
+      return objToRepresent;
     }
   }
+
+  filterAuthor() {
+    if(this.props.posts.length > 0) {
+      let filter = [];
+      this.props.posts.map( post => {
+        filter.push(post.author);
+      })
+
+      let filterObj = this.filterCount(filter);
+
+      let objToRepresent = Object.keys(filterObj).map((key, i) => {
+        return (
+          <a href="#" className="list-group-item" key={i}>
+            <span className="badge">{filterObj[key]}</span>
+            {key}
+          </a>
+        )
+      })
+      return objToRepresent;
+    }
+  }
+
 
   render() {
     return (
@@ -45,18 +71,11 @@ class Filter extends Component {
         <h4><small className="glyphicon glyphicon-tag"></small> Category</h4>
         <div className="list-group">
           {this.filterTags()}
-          <a href="#" className="list-group-item">
-            <span className="badge">4</span>
-            AngularJS
-          </a>
         </div>
 
         <h4><small className="glyphicon glyphicon-user"></small> Author</h4>
         <div className="list-group">
-          <a href="#" className="list-group-item">
-            <span className="badge">2</span>
-            Alex Ilyaev
-          </a>
+          {this.filterAuthor()}
         </div>
 
         <h4><small className="glyphicon glyphicon-time"></small> Month</h4>
