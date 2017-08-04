@@ -15,6 +15,7 @@ class Root extends Component {
           <div className="row">
             <Navigation/>
             <Route path="/posts" component={PostsFeed} />
+            <Route path="/posts/:author" component={PostsFeed} />
             <Route path="/admin" component={Admin}/>
             <aside className="col-md-4">
               <Search/>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 class Filter extends Component {
 
@@ -19,14 +20,16 @@ class Filter extends Component {
           })
       })
 
-      let filterObj = this.filterCount(filter);
+      let filterObj = this.filterCount(filter.sort());
 
       let objToRepresent = Object.keys(filterObj).map((key, i) => {
          return (
-           <a href="#" className="list-group-item" key={i}>
+           <NavLink to={`/posts/${key.toLowerCase()}`} className="list-group-item" key={i} activeClassName="active">
+           {/*<a href="#" className="list-group-item" key={i}>*/}
              <span className="badge">{filterObj[key]}</span>
              {key}
-           </a>
+           {/*</a>*/}
+           </NavLink>
          )
       })
       return objToRepresent;
@@ -40,14 +43,16 @@ class Filter extends Component {
         filter.push(post.author);
       })
 
-      let filterObj = this.filterCount(filter);
+      let filterObj = this.filterCount(filter.sort());
 
       let objToRepresent = Object.keys(filterObj).map((key, i) => {
         return (
-          <a href="#" className="list-group-item" key={i}>
+          <NavLink to="/author" className="list-group-item" key={i} activeClassName="active">
+          {/*<a href="#" className="list-group-item" key={i}>*/}
             <span className="badge">{filterObj[key]}</span>
             {key}
-          </a>
+          {/*</a>*/}
+          </NavLink>
         )
       })
       return objToRepresent;
@@ -62,10 +67,10 @@ class Filter extends Component {
         <h3>Filter Posts</h3>
 
         <div className="list-group">
-          <a href="#" className="list-group-item active">
+          <NavLink to="/posts" className="list-group-item" activeClassName="active">
             <span className="badge">{this.props.posts.length}</span>
             Show All Posts
-          </a>
+          </NavLink>
         </div>
 
         <h4><small className="glyphicon glyphicon-tag"></small> Category</h4>

@@ -23,8 +23,10 @@ class PostService {
     }
 
     getPosts() {
-        let posts = $.get(this.url);
-        return posts;
+        // let posts = $.get(this.url);
+        // return posts;
+      return fetch(this.url)
+        .then(response => response.json())
     }
 }
 

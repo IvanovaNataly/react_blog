@@ -14,6 +14,7 @@ export default class Navigation extends Component {
             <button type="button" className="navbar-toggle">
               <span className="sr-only">Toggle navigation</span>
               <label >
+                {/*for="toggle-nav-mobile"*/}
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment  from 'moment';
 
 export default class PostPreview extends Component {
   renderTags(tag, i ) {
@@ -10,6 +11,10 @@ export default class PostPreview extends Component {
 
   }
 
+  time(date) {
+    return moment.unix(date/1000).format("MMM DD, YYYY");
+  }
+
   render() {
     return (
       <article>
@@ -17,11 +22,11 @@ export default class PostPreview extends Component {
           <h2>{this.props.preview.title}</h2>
           <p>
             <small className="glyphicon glyphicon-user"></small>
-            {this.props.preview.author}
+             by {this.props.preview.author}
           </p>
           <p>
             <small className="glyphicon glyphicon-time"></small>
-            {this.props.preview.date}
+             Posted on {this.time(this.props.preview.date)}
           </p>
         </header>
 

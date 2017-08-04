@@ -7,21 +7,34 @@ import { setPosts } from '../actions/actionCreators';
 
 
 class PostsFeed extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         //this.state =  {posts: []} ;
         this.onPosts();
         this.firstPost = 0;
         this.lastPost = 7;
+
+        if (props.match.params.author)
+          postService
+            .getFilteredPosts(props.match.params.author)
+            .then( (response) => {return this.postSorting(response.posts)} )
+            .then( (postToRepresent) =>  this.props.setPosts(postToRepresent))
     }
 
+    componentWillReceiveProps({match}) {
+      // console.log(this.props.match.params.author)
+        if(match.params.author)
+          postService
+            .getFilteredPosts(props.match.params.author)
+            .then( (response) => {return this.postSorting(response.posts)} )
+            .then( (postToRepresent) =>  this.props.setPosts(postToRepresent))
+    }
 
     onPosts () {
         postService
             .getPosts()
             .then( (response) => {return this.postSorting(response.posts)} )
             .then( (postToRepresent) =>  this.props.setPosts(postToRepresent))
-      //(response) =>  this.props.setPosts(response.posts))
     }
 
     postSorting(posts) {

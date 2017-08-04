@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 class Admin extends Component {
 
   renderPost(post,i) {
-    return <tr>
+    return <tr key={i}>
             <th scope="row">{i}</th>
             <td>{post.title}</td>
             <td>{post.author}</td>
@@ -23,15 +23,15 @@ class Admin extends Component {
               <th>#</th>
               <th>
                 Title
-                <span class="pull-right"></span>
+                <span className="pull-right"></span>
               </th>
               <th>
                 Author
-                <span class="pull-right"></span>
+                <span className="pull-right"></span>
               </th>
               <th>
                 Date
-                <span class="pull-right">
+                <span className="pull-right">
                 <i class="glyphicon glyphicon-chevron-down"></i>
               </span>
               </th>
