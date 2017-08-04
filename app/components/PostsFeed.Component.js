@@ -9,10 +9,9 @@ import { setPosts } from '../actions/actionCreators';
 class PostsFeed extends Component {
     constructor(props) {
         super(props);
-        //this.state =  {posts: []} ;
-        this.onPosts();
         this.firstPost = 0;
-        this.lastPost = 7;
+        this.lastPost = 2;
+
 
         // if (props.match.params.author)
         //   postService
@@ -50,7 +49,8 @@ class PostsFeed extends Component {
         }
         this.firstPost = this.firstPost +3;
         this.lastPost = this.lastPost +3;
-        return postToRepresent;
+        let postsToRender = postToRepresent.map(this.renderPreview.bind(this));
+      return postsToRender;
     }
 
 
@@ -61,6 +61,11 @@ class PostsFeed extends Component {
     }
 
     render() {
+      if(!this.props.posts)
+        return  <section className="col-md-8">
+                  <h2 className="page-header">Loading posts</h2>
+                </section>
+
         return(
             <section className="col-md-8">
                 <h2 className="page-header">Showing
@@ -69,7 +74,8 @@ class PostsFeed extends Component {
                     posts
                 </h2>
                 <ul className="posts-list">
-                    {this.props.posts.map( this.renderPreview.bind(this) )}
+                    {/*{this.props.posts.map( this.renderPreview.bind(this) )}*/}
+                  {this.postSorting(this.props.posts)}
                 </ul>
                 <Pager/>
             </section>
@@ -78,11 +84,7 @@ class PostsFeed extends Component {
 }
 
 function mapStateToProps(state) {
-    return { posts: state.posts }
+    return { posts: state.posts.posts }
 }
 
-function mapDispatchToProps(dispatch) {
-  return { setPosts: (posts) => dispatch( setPosts(posts) ) }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PostsFeed)
+export default connect(mapStateToProps, null)(PostsFeed)

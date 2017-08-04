@@ -1,5 +1,11 @@
 import * as ACTIONS from './actions';
+import postService from '../services/postService';
 
 export function setPosts(posts) {
-    return {type: ACTIONS.SET_POSTS, posts}
+  return dispatch => {
+    dispatch( { type: ACTIONS.SET_POSTS_REQUEST} );
+
+    postService.getPosts()
+      .then( posts => dispatch( { type: ACTIONS.SET_POSTS_RESPONSE, posts} ) )
+  }
 }

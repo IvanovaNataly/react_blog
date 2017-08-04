@@ -5,9 +5,14 @@ import Navigation from "./Navigation.Component";
 import Admin from "./Admin.Component";
 import Search from "./Search.Component";
 import Filter from "./Filter.Component";
-
+import { connect } from 'react-redux';
+import { setPosts } from '../actions/actionCreators';
 
 class Root extends Component {
+  constructor(props){
+    super(props);
+    this.props.setPosts();
+  }
   render() {
     return (
 
@@ -28,5 +33,8 @@ class Root extends Component {
     )
   }
 }
+function mapDispatchToProps(dispatch) {
+  return { setPosts: (posts) => dispatch( setPosts(posts) ) }
+}
 
-export default Root;
+export default connect(null, mapDispatchToProps)(Root)
