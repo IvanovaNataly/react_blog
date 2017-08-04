@@ -14,27 +14,32 @@ class PostsFeed extends Component {
         this.firstPost = 0;
         this.lastPost = 7;
 
-        if (props.match.params.author)
-          postService
-            .getFilteredPosts(props.match.params.author)
-            .then( (response) => {return this.postSorting(response.posts)} )
-            .then( (postToRepresent) =>  this.props.setPosts(postToRepresent))
+        // if (props.match.params.author)
+        //   postService
+        //     .getFilteredPosts(props.match.params.author)
+        //     .then( (response) => {return this.postSorting(response.posts)} )
+        //     .then( (postToRepresent) =>  this.props.setPosts(postToRepresent))
     }
 
-    componentWillReceiveProps({match}) {
-      // console.log(this.props.match.params.author)
-        if(match.params.author)
-          postService
-            .getFilteredPosts(props.match.params.author)
-            .then( (response) => {return this.postSorting(response.posts)} )
-            .then( (postToRepresent) =>  this.props.setPosts(postToRepresent))
-    }
+    // componentWillReceiveProps({match}) {
+    //     if(match.params.author)
+    //       postService
+    //         .getFilteredPosts(props.match.params.author)
+    //         .then( (response) => {return this.postSorting(response.posts)} )
+    //         .then( (postToRepresent) =>  this.props.setPosts(postToRepresent))
+    // }
 
     onPosts () {
         postService
             .getPosts()
-            .then( (response) => {return this.postSorting(response.posts)} )
-            .then( (postToRepresent) =>  this.props.setPosts(postToRepresent))
+            //.then( (response) => this.props.setPosts(response))
+
+            //.then( (response) =>  {console.log(response); this.postSorting(response.posts)})
+          .then(this.onAllPosts.bind(this))
+    }
+
+    onAllPosts(posts) {
+      this.props.setPosts(posts.posts)
     }
 
     postSorting(posts) {
