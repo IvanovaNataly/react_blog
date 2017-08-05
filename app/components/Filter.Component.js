@@ -24,12 +24,12 @@ class Filter extends Component {
 
       let objToRepresent = Object.keys(filterObj).map((key, i) => {
          return (
-           <NavLink to={`/posts/${key.toLowerCase()}`} className="list-group-item" key={i} activeClassName="active">
-           {/*<a href="#" className="list-group-item" key={i}>*/}
+
+           <a href="#" className="list-group-item" key={i}>
              <span className="badge">{filterObj[key]}</span>
              {key}
-           {/*</a>*/}
-           </NavLink>
+           </a>
+
          )
       })
       return objToRepresent;
@@ -46,12 +46,11 @@ class Filter extends Component {
       let filterObj = this.filterCount(filter.sort());
 
       let objToRepresent = Object.keys(filterObj).map((key, i) => {
+        let authorName = key.replace(" ", "-").toLowerCase();
         return (
-          <NavLink to="/author" className="list-group-item" key={i} activeClassName="active">
-          {/*<a href="#" className="list-group-item" key={i}>*/}
+          <NavLink to={`posts/${authorName}`} className="list-group-item" key={i} activeClassName="active">
             <span className="badge">{filterObj[key]}</span>
             {key}
-          {/*</a>*/}
           </NavLink>
         )
       })
@@ -111,8 +110,11 @@ class Filter extends Component {
 
 function mapStateToProps(state) {
   return {
-    posts: state.posts.posts
+    posts: state.posts
   }
 }
 
 export default connect(mapStateToProps, null)(Filter);
+
+
+/**/

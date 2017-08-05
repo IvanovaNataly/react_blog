@@ -9,49 +9,32 @@ import { setPosts } from '../actions/actionCreators';
 class PostsFeed extends Component {
     constructor(props) {
         super(props);
-        this.firstPost = 0;
-        this.lastPost = 2;
-
-
-        // if (props.match.params.author)
-        //   postService
-        //     .getFilteredPosts(props.match.params.author)
-        //     .then( (response) => {return this.postSorting(response.posts)} )
-        //     .then( (postToRepresent) =>  this.props.setPosts(postToRepresent))
-    }
-
-    // componentWillReceiveProps({match}) {
-    //     if(match.params.author)
-    //       postService
-    //         .getFilteredPosts(props.match.params.author)
-    //         .then( (response) => {return this.postSorting(response.posts)} )
-    //         .then( (postToRepresent) =>  this.props.setPosts(postToRepresent))
-    // }
-
-    onPosts () {
-        postService
-            .getPosts()
-            //.then( (response) => this.props.setPosts(response))
-
-            //.then( (response) =>  {console.log(response); this.postSorting(response.posts)})
-          .then(this.onAllPosts.bind(this))
-    }
-
-    onAllPosts(posts) {
-      this.props.setPosts(posts.posts)
-    }
-
-    postSorting(posts) {
-        let postToRepresent = [];
-
-        for (let i = this.firstPost; i <= this.lastPost; i++) {
-            postToRepresent.push(posts[i]);
+        this.state = {
+          filteredList: props.posts,
+          firstPost: 0,
+          lastPost: 2
         }
-        this.firstPost = this.firstPost +3;
-        this.lastPost = this.lastPost +3;
-        let postsToRender = postToRepresent.map(this.renderPreview.bind(this));
-      return postsToRender;
     }
+
+    componentWillReceiveProps(nextProps) {
+      this.setState({ filteredList: nextProps.posts})
+    }
+  
+
+  postFilter(value) {
+      let postToRepresent = this.props.posts.filter( post => {
+        let name = post.author.replace(" ", "-").toLowerCase();
+        return name.indexOf(value) > -1;
+      })
+
+      // for (let i = this.state.firstPost; i <= this.state.lastPost; i++) {
+      //   postToRepresent.push(posts[i]);
+      // }
+      // this.state.firstPost = this.state.firstPost +3;
+      // this.state.lastPost = this.state.lastPost +3;
+      let postsToRender = postToRepresent.map(this.renderPreview.bind(this));
+      return postsToRender;
+  }
 
 
     renderPreview(post, i) {
@@ -61,7 +44,7 @@ class PostsFeed extends Component {
     }
 
     render() {
-      if(!this.props.posts)
+      if(this.props.posts.length === 0)
         return  <section className="col-md-8">
                   <h2 className="page-header">Loading posts</h2>
                 </section>
@@ -74,8 +57,7 @@ class PostsFeed extends Component {
                     posts
                 </h2>
                 <ul className="posts-list">
-                    {/*{this.props.posts.map( this.renderPreview.bind(this) )}*/}
-                  {this.postSorting(this.props.posts)}
+                  {this.postFilter("alex-ilyaev")}
                 </ul>
                 <Pager/>
             </section>
@@ -84,7 +66,7 @@ class PostsFeed extends Component {
 }
 
 function mapStateToProps(state) {
-    return { posts: state.posts.posts }
+    return { posts: state.posts }
 }
 
 export default connect(mapStateToProps, null)(PostsFeed)

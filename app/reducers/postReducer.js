@@ -6,7 +6,7 @@ export default function postReducer(state = [], action) {
             case ACTIONS.SET_POSTS_REQUEST:
                 return state;
             case ACTIONS.SET_POSTS_RESPONSE:
-                return action.posts;
+                return action.posts.posts;
     }
     return state;
 }
