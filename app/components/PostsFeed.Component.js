@@ -17,9 +17,10 @@ class PostsFeed extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-      this.setState({ filteredList: nextProps.posts})
+      this.setState({ filteredList: nextProps.posts});
+      console.log(nextProps.match.params);
     }
-  
+
 
   postFilter(value) {
       let postToRepresent = this.props.posts.filter( post => {
@@ -57,7 +58,7 @@ class PostsFeed extends Component {
                     posts
                 </h2>
                 <ul className="posts-list">
-                  {this.postFilter("alex-ilyaev")}
+                  {this.postFilter(this.props.match.params.author)}
                 </ul>
                 <Pager/>
             </section>

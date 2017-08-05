@@ -48,7 +48,7 @@ class Filter extends Component {
       let objToRepresent = Object.keys(filterObj).map((key, i) => {
         let authorName = key.replace(" ", "-").toLowerCase();
         return (
-          <NavLink to={`posts/${authorName}`} className="list-group-item" key={i} activeClassName="active">
+          <NavLink to={`/posts/${authorName}`} className="list-group-item" key={i} activeClassName="active">
             <span className="badge">{filterObj[key]}</span>
             {key}
           </NavLink>

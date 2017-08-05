@@ -6,6 +6,7 @@ import Admin from "./Admin.Component";
 import Search from "./Search.Component";
 import Filter from "./Filter.Component";
 import { connect } from 'react-redux';
+import {withRouter} from "react-router";
 import { setPosts } from '../actions/actionCreators';
 
 class Root extends Component {
@@ -37,4 +38,4 @@ function mapDispatchToProps(dispatch) {
   return { setPosts: (posts) => dispatch( setPosts(posts) ) }
 }
 
-export default connect(null, mapDispatchToProps)(Root)
+export default withRouter(connect(null, mapDispatchToProps)(Root))

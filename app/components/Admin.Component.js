@@ -32,7 +32,7 @@ class Admin extends Component {
               <th>
                 Date
                 <span className="pull-right">
-                <i class="glyphicon glyphicon-chevron-down"></i>
+                <i className="glyphicon glyphicon-chevron-down"></i>
               </span>
               </th>
             </tr>
