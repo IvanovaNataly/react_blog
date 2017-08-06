@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class Filter extends Component {
 
@@ -22,17 +23,16 @@ class Filter extends Component {
 
       let filterObj = this.filterCount(filter.sort());
 
-      let objToRepresent = Object.keys(filterObj).map((key, i) => {
+      let filters = Object.keys(filterObj).map((key, i) => {
+          let reference = key.replace(" ", "-").toLowerCase();
          return (
-
-           <a href="#" className="list-group-item" key={i}>
+           <NavLink to={`/posts/${reference}`} className="list-group-item" key={i} activeClassName="active">
              <span className="badge">{filterObj[key]}</span>
              {key}
-           </a>
-
+           </NavLink>
          )
       })
-      return objToRepresent;
+      return filters;
     }
   }
 
@@ -45,16 +45,21 @@ class Filter extends Component {
 
       let filterObj = this.filterCount(filter.sort());
 
-      let objToRepresent = Object.keys(filterObj).map((key, i) => {
-        let authorName = key.replace(" ", "-").toLowerCase();
+      let filters = Object.keys(filterObj).map((key, i) => {
+        let reference = key.replace(" ", "-").toLowerCase();
         return (
-          <NavLink to={`/posts/${authorName}`} className="list-group-item" key={i} activeClassName="active">
+
+
+        <Link to={{
+          pathname: '/posts',
+          search: `?author=${reference}`
+        }} className="list-group-item" key={i} >
             <span className="badge">{filterObj[key]}</span>
             {key}
-          </NavLink>
+          </Link>
         )
       })
-      return objToRepresent;
+      return filters;
     }
   }
 
@@ -117,4 +122,4 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, null)(Filter);
 
 
-/**/
+/*  <NavLink to={`/posts/${reference}`} className="list-group-item" key={i} activeClassName="active">*/

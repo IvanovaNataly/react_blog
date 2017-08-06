@@ -20,8 +20,8 @@ class Root extends Component {
         <div className="container">
           <div className="row">
             <Navigation/>
-            <Route path="/posts" component={PostsFeed} />
-            <Route path="/posts/:author" component={PostsFeed} />
+            <Route exact path="/posts" component={PostsFeed} />
+            <Route path="/posts/:reference" component={PostsFeed} />
             <Route path="/admin" component={Admin}/>
             <aside className="col-md-4">
               <Search/>

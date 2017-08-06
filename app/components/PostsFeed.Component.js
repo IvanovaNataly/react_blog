@@ -58,7 +58,7 @@ class PostsFeed extends Component {
                     posts
                 </h2>
                 <ul className="posts-list">
-                  {this.postFilter(this.props.match.params.author)}
+                  {this.postFilter(this.props.match.params.reference)}
                 </ul>
                 <Pager/>
             </section>
