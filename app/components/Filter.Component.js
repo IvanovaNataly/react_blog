@@ -48,15 +48,11 @@ class Filter extends Component {
       let filters = Object.keys(filterObj).map((key, i) => {
         let reference = key.replace(" ", "-").toLowerCase();
         return (
-
-
-        <Link to={{
-          pathname: '/posts',
-          search: `?author=${reference}`
-        }} className="list-group-item" key={i} >
+          <NavLink to={`/posts/${reference}`} className="list-group-item" key={i} activeClassName="active">
             <span className="badge">{filterObj[key]}</span>
             {key}
-          </Link>
+          </NavLink>
+
         )
       })
       return filters;
@@ -123,3 +119,13 @@ export default connect(mapStateToProps, null)(Filter);
 
 
 /*  <NavLink to={`/posts/${reference}`} className="list-group-item" key={i} activeClassName="active">*/
+
+/*
+<Link to={{
+  pathname: '/posts',
+  search: `?author=${reference}`
+}} className="list-group-item" key={i} >
+  <span className="badge">{filterObj[key]}</span>
+  {key}
+</Link>
+*/
