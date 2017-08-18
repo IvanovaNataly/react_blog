@@ -14,13 +14,12 @@ export default class Navigation extends Component {
             <button type="button" className="navbar-toggle">
               <span className="sr-only">Toggle navigation</span>
               <label >
-                {/*for="toggle-nav-mobile"*/}
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </label>
             </button>
-            <a className="navbar-brand" href="#/">Netcraft Academy</a>
+              <NavLink to="/" activeClassName="active" className="navbar-brand">Netcraft Academy</NavLink>
           </div>
 
           <div className="collapse navbar-collapse">
@@ -31,12 +30,6 @@ export default class Navigation extends Component {
               <li>
                 <NavLink to="/admin" activeClassName="active">Admin</NavLink>
               </li>
-              {/**/}
-                {/*<a href="#/posts">Posts</a>*/}
-              {/*</li>*/}
-              {/*<li>*/}
-                {/*<a href="#/admin">Admin</a>*/}
-              {/*</li>*/}
             </ul>
           </div>
 
