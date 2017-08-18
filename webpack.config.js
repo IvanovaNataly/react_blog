@@ -124,7 +124,10 @@ const config = {
     colors: true,
     noInfo: true,
     inline: true,
-    historyApiFallback: true
+    historyApiFallback: true,
+      proxy: {
+          "/api": "http://localhost:9090"
+      }
   },
 
   postcss: [

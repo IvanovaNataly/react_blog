@@ -8,18 +8,20 @@
     "build": "NODE_ENV=production webpack -p --progress",
     "prebuildwin": "npm prune&npm install",
     "buildwin": "set NODE_ENV=production&webpack -p --progress",
-    "prod": "serve dist -p 3000"
+    "prod": "serve dist -p 3000",
+    "app": "node app/server/app.js"
   },
   "dependencies": {
     "bootstrap": "3.3.1",
+    "express": "4.15.4",
     "jquery": "3.2.1",
     "lodash": "4.13.1",
     "marked": "0.3.5",
     "moment": "2.18.1",
-    "prop-types": "15.5.10",
     "query-string": "5.0.0",
     "react-dom": "15.6.1",
     "react-redux": "4.4.5",
+    "react-render-html": "0.5.0",
     "react-router": "2.4.1",
     "react-router-dom": "4.1.2",
     "redux": "3.5.2",
@@ -51,5 +53,6 @@
     "webpack": "1.13.1",
     "webpack-dev-server": "1.14.1"
   },
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "false": {}
 }

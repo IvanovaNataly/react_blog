@@ -3,14 +3,11 @@ class HTMLService {
         this.url = "../data/posts/html/";
     }
 
-    getHTML() {
-        return fetch(this.url + "AngularJS - Controllers.html")
-                 .then(response => {
-                     return response.text()
-                 })
-        // .then(txt=> {
-        //     console.log('txt: ',txt)
-        // })
+    getHTML(title) {
+        return fetch(this.url + title + ".html")
+        .then(response => {
+            return response.text()
+        })
     }
 }
 

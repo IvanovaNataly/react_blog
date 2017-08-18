@@ -1,55 +1,67 @@
-// import React, { Component } from 'react';
-//
-// import { WebView } from 'react-native';
-//
-//
-// const cl = console.log;
-//
-// export default class PostPage extends Component {
-//     // componentDidMount() {
-//     //     htmlService.getHTML()
-//     //     .then( page => cl(typeof(page)) )
-//     // }
-//
-//     render() {
-//         const html = `
-//         <div>
-//             <h1>A Sample H1 Title</h1>
-//             <h2>A Sample H2 Title</h2>
-//         </div> `
-//
-//         return (
-//
-//             <WebView
-//                 source={{uri: 'https://github.com/facebook/react-native'}}
-//                 style={{marginTop: 20}}
-//             />
-//
-//         )
-//     }
-// }
-var React = require('react')
-//var ReactNative = require('react-native')
-//var {Text, View, ListView} = ReactNative
+import React, { Component } from 'react';
+import renderHTML from 'react-render-html';
+import htmlService from '../services/htmlService';
 
-var HTMLView = require('react-native-htmlview')
 
-var App = React.createClass({
+const cl = console.log;
+
+export default class PostPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { page: "" };
+        // cl(props.match.params.title);
+    }
+
+    restoreTitle() {
+        let title = this.props.match.params.title.replace("-", " - ");
+        cl(title);
+        return title;
+    }
+
+    componentDidMount() {
+        htmlService.getHTML(this.restoreTitle())
+            .then( page => {
+                this.setState({page});
+            } )
+    }
+
     render() {
-        var htmlContent = '<p><a href="http://jsdf.co">&hearts; nice job!</a></p>'
 
         return (
-            <HTMLView
-                value={htmlContent}
-                stylesheet={styles}
-            />
+        <article>
+            <header>
+                <h2>
+                    {/*{this.props.preview.title}*/}
+                </h2>
+                <p>
+                    <small className="glyphicon glyphicon-user"></small>
+                    {/*by {this.props.preview.author}*/}
+                </p>
+                <p>
+                    <small className="glyphicon glyphicon-time"></small>
+                    Posted on
+                    {/*{this.time(this.props.preview.date)}*/}
+                </p>
+            </header>
+
+            <br/>
+
+            <footer className="clearfix">
+                <p className="pull-left">
+                    <span className="tags-title">Tags:</span>
+                    {/*{this.props.preview.tags.map( this.renderTags.bind(this) ) }*/}
+                </p>
+
+            </footer>
+            <hr/>
+
+            <div>
+                {renderHTML(this.state.page)}
+            </div>
+
+        </article>
+
+
         )
     }
-})
-
-var styles = StyleSheet.create({
-    a: {
-        fontWeight: '300',
-        color: '#FF3366', // pink links
-    },
-})
+}
