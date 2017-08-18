@@ -7,7 +7,8 @@
     "prebuild": "npm prune; npm install",
     "build": "NODE_ENV=production webpack -p --progress",
     "prebuildwin": "npm prune&npm install",
-    "buildwin": "set NODE_ENV=production&webpack -p --progress"
+    "buildwin": "set NODE_ENV=production&webpack -p --progress",
+    "prod": "serve dist -p 3000"
   },
   "dependencies": {
     "bootstrap": "3.3.1",
@@ -18,12 +19,14 @@
     "prop-types": "15.5.10",
     "query-string": "5.0.0",
     "react-dom": "15.6.1",
+    "react-native": "0.47.1",
     "react-redux": "4.4.5",
     "react-router": "2.4.1",
     "react-router-dom": "4.1.2",
     "redux": "3.5.2",
     "redux-devtools-extension": "2.13.2",
-    "redux-thunk": "2.2.0"
+    "redux-thunk": "2.2.0",
+    "serve": "6.0.6"
   },
   "devDependencies": {
     "autoprefixer": "6.4.0",

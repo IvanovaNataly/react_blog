@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from "react-router-dom";
 import moment  from 'moment';
 
 export default class PostPreview extends Component {
@@ -19,10 +20,14 @@ export default class PostPreview extends Component {
     return (
       <article>
         <header>
-          <h2>{this.props.preview.title}</h2>
+          <h2>
+              <NavLink to="/postPage" activeClassName="active">
+                  {this.props.preview.title}
+              </NavLink>
+          </h2>
           <p>
             <small className="glyphicon glyphicon-user"></small>
-             by {this.props.preview.author}
+               by {this.props.preview.author}
           </p>
           <p>
             <small className="glyphicon glyphicon-time"></small>

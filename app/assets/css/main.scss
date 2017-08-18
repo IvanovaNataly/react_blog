@@ -14,6 +14,9 @@
   font-weight: 700;
 }
 
+.glyphicon {
+    margin-right: 10px;
+}
 //Navigation
 li>a.active {
   background-image: -webkit-linear-gradient(top,#080808 0,#0f0f0f 100%);
@@ -26,3 +29,13 @@ li>a.active {
   box-shadow: inset 0 3px 9px rgba(0,0,0,.25);
 }
 
+
+.post-page {
+    height: 100px;
+    background: pink;
+}
+
+.post-content{
+    height: 100px;
+    background-color: navy;
+}
