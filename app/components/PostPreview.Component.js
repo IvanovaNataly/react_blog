@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import moment  from "moment";
 
-export default class PostPreview extends Component {
+import { postSelected } from "../actions/actionCreators";
+
+class PostPreview extends Component {
     renderTags(tag, i ) {
         return <span key={i}>
                 <a href="#" className="label label-default"> {tag} </a>
@@ -20,22 +22,24 @@ export default class PostPreview extends Component {
     }
 
     onTitleClicked() {
-        console.log("clicked")
+        console.log("clicked");
+        this.props.onPostSelected(this.props.preview);
     }
 
     render() {
+
         return (
             <article>
                 <header>
-                    <h2>
+                    <h2 onClick={this.onTitleClicked.bind(this)}>
                         <NavLink exact to={`/article/${this.trimTitle( this.props.preview.title )}`}
-                                 activeClassName="active" onClick={this.onTitleClicked}>
+                                 activeClassName="active" >
                             {this.props.preview.title}
                         </NavLink>
                     </h2>
                     <p>
                         <small className="glyphicon glyphicon-user"></small>
-                            by {this.props.preview.author}
+                        by {this.props.preview.author}
                     </p>
                     <p>
                         <small className="glyphicon glyphicon-time"></small>
@@ -52,11 +56,13 @@ export default class PostPreview extends Component {
                         {this.props.preview.tags.map( this.renderTags.bind(this) ) }
                     </p>
 
-                    <NavLink exact to={`/article/${this.trimTitle( this.props.preview.title )}`}
-                             activeClassName="active" className="btn btn-primary pull-right">
+                    <span onClick={this.onTitleClicked.bind(this)}>
+                        <NavLink exact to={`/article/${this.trimTitle( this.props.preview.title )}`}
+                                 activeClassName="active" className="btn btn-primary pull-right">
                         Read More
                         <i className="glyphicon glyphicon-chevron-right"></i>
                     </NavLink>
+                    </span>
 
                 </footer>
                 <hr/>
@@ -65,11 +71,9 @@ export default class PostPreview extends Component {
         )
     }
 }
-//
-// function mapDispatchToProps(dispatch) {
-//     return{
-//         pageChosen: page => dispatch( onPageChosen(page) )
-//     }
-// }
-//
-// export default connect(null, mapDispatchToProps)(PostPreview);
+
+function mapDispatchToProps(dispatch) {
+    return { onPostSelected: (post) => dispatch( postSelected(post) ) }
+}
+
+export default connect(null, mapDispatchToProps)(PostPreview);

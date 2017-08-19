@@ -20,17 +20,15 @@ class Root extends Component {
         return (
 
         <div className="container">
+            <Navigation/>
+
             <div className="row">
 
-                <Navigation/>
-
-                <section className="col-md-8">
-                    <Route exact path="/" component={Home} />
-                    <Route exact path="/posts" component={PostsFeed} />
-                    <Route path="/posts/:reference" component={PostsFeed} />
-                    <Route path="/admin" component={Admin}/>
-                    <Route path="/article/:title" component={PostPage}/>
-                </section>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/posts" component={PostsFeed} />
+                <Route path="/posts/:reference" component={PostsFeed} />
+                <Route path="/admin" component={Admin}/>
+                <Route path="/article/:title" component={PostPage}/>
 
                 <aside className="col-md-4">
                     <Search/>
@@ -44,7 +42,7 @@ class Root extends Component {
     }
 }
 function mapDispatchToProps(dispatch) {
-return { setPosts: (posts) => dispatch( setPosts(posts) ) }
+    return { setPosts: (posts) => dispatch( setPosts(posts) ) }
 }
 
 export default withRouter(connect(null, mapDispatchToProps)(Root))

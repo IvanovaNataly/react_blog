@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PostPreview from './PostPreview.Component';
 import Pager from './Pager.Component';
-import { setPosts } from '../actions/actionCreators';
 
 const cl = console.log;
 
@@ -64,14 +63,14 @@ class PostsFeed extends Component {
 
         return(
             <section className="col-md-8">
-            <h2 className="page-header">Showing
-                    <span> {this.props.match.params.page} </span>
-                posts
-            </h2>
-            <ul className="posts-list">
-                {this.postFilter(this.props.match.params.reference)}
-            </ul>
-            <Pager/>
+                <h2 className="page-header">Showing
+                        <span> {this.props.match.params.page} </span>
+                    posts
+                </h2>
+                <ul className="posts-list">
+                    {this.postFilter(this.props.match.params.reference)}
+                </ul>
+                <Pager/>
             </section>
         )
     }

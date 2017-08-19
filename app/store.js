@@ -4,13 +4,16 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 const state = {
-      posts: []
-}
+    posts: [],
+    selectedPost: {}
+};
 
 let middlewares = applyMiddleware(thunk);
 
 export default createStore(
-  appReducer,
-  state,
-  composeWithDevTools(middlewares)
+    appReducer,
+    state,
+    composeWithDevTools(middlewares)
 );
+
+
