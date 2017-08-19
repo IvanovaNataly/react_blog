@@ -9,7 +9,7 @@ class PostsFeed extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            filteredList: props.posts,
+            postsCounted: props.posts,
             firstPost: 0,
             lastPost: 2
         }
@@ -17,6 +17,18 @@ class PostsFeed extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({ filteredList: nextProps.posts});
+    }
+
+
+    postCount(posts) {
+        let postToRepresent = [];
+        for (let i = this.state.firstPost; i <= this.state.lastPost; i++) {
+            postToRepresent.push(posts[i]);
+        }
+        //this.setState({postsCounted: postToRepresent});
+        //this.setState({firstPost: this.state.firstPost+3});
+        //this.setState({lastPost: this.state.lastPost+3});
+        return postToRepresent;
     }
 
 
@@ -44,7 +56,10 @@ class PostsFeed extends Component {
             }
         }
 
-        else return this.props.posts.map(this.renderPreview.bind(this));
+        else {
+            let postToRepresent = this.postCount(this.props.posts);
+            return postToRepresent.map(this.renderPreview.bind(this));
+        }
 
     }
 

@@ -46,6 +46,7 @@ class PostPage extends Component {
                         <h2>
                             {this.props.selectedPost.title}
                         </h2>
+                        <hr/>
                         <p>
                             <small className="glyphicon glyphicon-user"></small>
                             by {this.props.selectedPost.author}
