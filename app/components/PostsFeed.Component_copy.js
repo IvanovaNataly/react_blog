@@ -1,3 +1,5 @@
+
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PostPreview from './PostPreview.Component';
@@ -9,42 +11,30 @@ class PostsFeed extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            filteredList: props.posts,
-            pageNumber: 1,
+            postsCounted: props.posts,
             firstPost: 0,
             lastPost: 2
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps.match.params.reference);
-        let filteredList = this.postFilter(nextProps.posts);
-        this.setState({ filteredList: filteredList,
-                    pageNumber: this.setPageNumber(nextProps.match.params.reference),
-                    firstPost: this.state.firstPost+3,
-                    lastPost: this.state.lastPost+3
-                });
+        this.setState({ filteredList: nextProps.posts});
     }
 
-    setPageNumber(pageNumber) {
-        if(!pageNumber) {
-            return 1;
-        }
-        else return parseInt(pageNumber);
-    }
 
     postCount(posts) {
-        let pager = this.state.pageNumber * 3 - 1;
         let postToRepresent = [];
-        for (let i = pager - 2; i <= pager; i++) {
-            if(!posts[i]) break;
+        for (let i = this.state.firstPost; i <= this.state.lastPost; i++) {
             postToRepresent.push(posts[i]);
         }
-        return postToRepresent.map(this.renderPreview.bind(this));
+        //this.setState({postsCounted: postToRepresent});
+        //this.setState({firstPost: this.state.firstPost+3});
+        //this.setState({lastPost: this.state.lastPost+3});
+        return postToRepresent;
     }
 
 
-    postFilter(posts) {
+    postFilter() {
         if (location.search) {
             let locationArr = location.search.split("?")[1].split("=");
             let locationKey = locationArr[0];
@@ -52,22 +42,27 @@ class PostsFeed extends Component {
 
             switch(locationKey){
                 case ("author"):
-                    let postToRepresent = posts.filter( post => {
+                    let postToRepresent = this.props.posts.filter( post => {
                         let name = post.author.replace(" ", "-").toLowerCase();
                         return name.indexOf(locationValue) > -1;
                     });
-                    return postToRepresent;
+                    return postToRepresent.map(this.renderPreview.bind(this));
                 case ("topic"):
-                    var postToRepresent = posts.filter( post => {
+                    var postToRepresent = this.props.posts.filter( post => {
                         let tagsArr = post.tags.filter(tag => {
                             return tag.toLowerCase().indexOf(locationValue) > -1;
                         })
                         return tagsArr.length > 0;
                     });
-                    return postToRepresent;
+                    return postToRepresent.map(this.renderPreview.bind(this));
             }
         }
-        else return posts;
+
+        else {
+            let postToRepresent = this.postCount(this.props.posts);
+            return postToRepresent.map(this.renderPreview.bind(this));
+        }
+
     }
 
 
@@ -86,13 +81,13 @@ class PostsFeed extends Component {
         return(
             <section className="col-md-8">
                 <h2 className="page-header">Showing
-                    <span> {this.postCount(this.state.filteredList).length} </span>
+                    <span> {this.props.match.params.page} </span>
                     posts
                 </h2>
                 <ul className="posts-list">
-                    {this.postCount(this.state.filteredList)}
+                    {this.postFilter(this.props.match.params.reference)}
                 </ul>
-                <Pager currentPage={this.state.pageNumber}/>
+                <Pager/>
             </section>
         )
     }
@@ -103,4 +98,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, null)(PostsFeed)
-
