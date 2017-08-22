@@ -11,8 +11,7 @@ class PostsFeed extends Component {
         this.state = {
             filteredList: props.posts,
             pageNumber: 1,
-            firstPost: 0,
-            lastPost: 2
+            maxPageNumber: Math.ceil(props.posts/3)
         }
     }
 
@@ -21,8 +20,7 @@ class PostsFeed extends Component {
         let filteredList = this.postFilter(nextProps.posts);
         this.setState({ filteredList: filteredList,
                     pageNumber: this.setPageNumber(nextProps.match.params.reference),
-                    firstPost: this.state.firstPost+3,
-                    lastPost: this.state.lastPost+3
+                    maxPageNumber: Math.ceil(filteredList.length/3)
                 });
     }
 
@@ -49,16 +47,17 @@ class PostsFeed extends Component {
             let locationArr = location.search.split("?")[1].split("=");
             let locationKey = locationArr[0];
             let locationValue = locationArr[1];
+            let postToRepresent;
 
             switch(locationKey){
                 case ("author"):
-                    let postToRepresent = posts.filter( post => {
+                    postToRepresent  = posts.filter( post => {
                         let name = post.author.replace(" ", "-").toLowerCase();
                         return name.indexOf(locationValue) > -1;
                     });
                     return postToRepresent;
                 case ("topic"):
-                    var postToRepresent = posts.filter( post => {
+                    postToRepresent = posts.filter( post => {
                         let tagsArr = post.tags.filter(tag => {
                             return tag.toLowerCase().indexOf(locationValue) > -1;
                         })
@@ -78,6 +77,7 @@ class PostsFeed extends Component {
     }
 
     render() {
+        cl(this.state.maxPageNumber);
         if(this.props.posts.length === 0)
             return  <section className="col-md-8">
                 <h2 className="page-header">Loading posts</h2>
@@ -92,7 +92,7 @@ class PostsFeed extends Component {
                 <ul className="posts-list">
                     {this.postCount(this.state.filteredList)}
                 </ul>
-                <Pager currentPage={this.state.pageNumber}/>
+                <Pager currentPage={this.state.pageNumber} maxPageNumber={this.state.maxPageNumber}/>
             </section>
         )
     }

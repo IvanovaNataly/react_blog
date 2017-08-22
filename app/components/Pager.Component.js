@@ -6,22 +6,41 @@ export default class PrePager extends Component {
     constructor() {
         super();
         this.state = {
-            currentPage: 1
+            isPreviousDisabled: "",
+            isNextDisabled: ""
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({ currentPage: nextProps.currentPage })
+        if (nextProps.currentPage === nextProps.maxPageNumber)
+            this.setState({isPreviousDisabled: "disabled"});
+        else this.setState({isPreviousDisabled: ""})
+
+        if (nextProps.currentPage === 1)
+            this.setState({isNextDisabled: "disabled"});
+        else this.setState({isNextDisabled: ""})
+    }
+
+    renderPreviousLink() {
+        if(!this.state.isPreviousDisabled)
+            return <NavLink to={`/posts/${ this.props.currentPage + 1 }` }>← Older</NavLink>;
+        else return <span>← Older</span>;
+    }
+
+    renderNextLink() {
+        if(!this.state.isNextDisabled)
+            return <NavLink to={`/posts/${ this.props.currentPage - 1 }` }>Newer →</NavLink>;
+        else return <span>Newer →</span>;
     }
 
     render() {
         return(
             <ul className="pager">
-                <li id="previous" className="previous">
-                    <NavLink to={`/posts/${ this.state.currentPage + 1 }`}>← Older</NavLink>
+                <li id="previous" className={`previous ${this.state.isPreviousDisabled}`}>
+                    {this.renderPreviousLink()}
                 </li>
-                <li id="next" className="next">
-                    <NavLink to={`/posts/${ this.state.currentPage - 1}`}>Newer →</NavLink>
+                <li id="next" className={`next ${this.state.isNextDisabled}`}>
+                    {this.renderNextLink()}
                 </li>
             </ul>
         )

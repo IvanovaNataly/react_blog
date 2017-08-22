@@ -12,6 +12,7 @@
     "app": "node app/server/app.js"
   },
   "dependencies": {
+    "body-parser": "1.17.2",
     "bootstrap": "3.3.1",
     "express": "4.15.4",
     "jquery": "3.2.1",

@@ -12,17 +12,17 @@ class PostService {
 
 module.exports = new PostService();
 
-// let $ = require("jquery");
+//
 //
 // class PostService {
 //
 //
 //     getPosts(){
-//         let posts = $.get(`/api/posts`);
-//         return posts;
+//         return fetch (`/api/posts`)
+//             .then(response => console.log(response.json()))
 //     }
 //
 // }
-
-
-module.exports = new PostService();
+//
+//
+// module.exports = new PostService();

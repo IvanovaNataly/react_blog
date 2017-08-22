@@ -24,11 +24,11 @@ class Root extends Component {
 
             <div className="row">
 
-                <Route exact path="/" component={Home} />
-                <Route exact path="/posts" component={PostsFeed} />
-                <Route path="/posts/:reference" component={PostsFeed} />
-                <Route path="/admin" component={Admin}/>
-                <Route path="/article/:title" component={PostPage}/>
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/posts" component={PostsFeed} />
+                    <Route path="/posts/:reference" component={PostsFeed} />
+                    <Route path="/admin" component={Admin}/>
+                    <Route path="/article/:title" component={PostPage}/>
 
                 <aside className="col-md-4">
                     <Search/>
