@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
+import {browserHistory} from 'react-router';
 import moment  from "moment";
 
 class Admin extends Component {
@@ -10,11 +11,15 @@ class Admin extends Component {
     }
 
     renderPost(post,i) {
-        return <tr key={i}>
-                    <th scope="row">{i+1}</th>
-                    <td>{post.title}</td>
-                    <td>{post.author}</td>
-                    <td>{this.time(post.date)}</td>
+        return <tr key={i} >
+
+            {/*<NavLink to="/edit-post" activeClassName="active" className="navbar-brand">*/}
+
+                <th scope="row" onClick={this.handleClick}>{i+1}</th>
+                <td>{post.title}</td>
+                <td>{post.author}</td>
+                <td>{this.time(post.date)}</td>
+            {/*</NavLink>*/}
                 </tr>
     }
 
@@ -47,7 +52,7 @@ class Admin extends Component {
                     </tbody>
                 </table>
                 <footer>
-                    <NavLink to="/AddPost" className="btn btn-primary">Add Post</NavLink>
+                    <NavLink to="/add-post" className="btn btn-primary">Add Post</NavLink>
                 </footer>
             </section>
         )

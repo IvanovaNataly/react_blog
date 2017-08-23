@@ -11,6 +11,8 @@ import Search from "./Search.Component";
 import Filter from "./Filter.Component";
 import Home from "./Home.Component";
 import PostPage from "./PostPage.Component";
+import PresentPostNavigation from "./PresentPostNavigation.Component";
+import EditPost from "./admin/EditPost.Component";
 
 class Root extends Component {
     constructor(props){
@@ -24,18 +26,11 @@ class Root extends Component {
             <Navigation/>
 
             <div className="row">
-
-                <Route exact path="/" component={Home} />
-                <Route exact path="/posts" component={PostsFeed} />
-                <Route path="/posts/:reference" component={PostsFeed} />
                 <Route path="/admin" component={Admin}/>
+                <Route path="/posts" component={PresentPostNavigation} />
                 <Route path="/article/:title" component={PostPage}/>
-
-
-                <aside className="col-md-4">
-                    <Search/>
-                    <Filter/>
-                </aside>
+                <Route path="/add-post" component={EditPost}/>
+                <Route path="/edit-post" component={EditPost}/>
             </div>
         </div>
 
