@@ -16,7 +16,7 @@ export default class PrePager extends Component {
             this.setState({isPreviousDisabled: "disabled"});
         else this.setState({isPreviousDisabled: ""})
 
-        if (nextProps.currentPage === 1)
+        if (nextProps.currentPage == 1)
             this.setState({isNextDisabled: "disabled"});
         else this.setState({isNextDisabled: ""})
     }

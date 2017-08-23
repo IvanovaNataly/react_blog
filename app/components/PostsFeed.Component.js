@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from "react-router-dom";
 import PostPreview from './PostPreview.Component';
 import Pager from './Pager.Component';
 
@@ -16,7 +17,6 @@ class PostsFeed extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps.match.params.reference);
         let filteredList = this.postFilter(nextProps.posts);
         this.setState({ filteredList: filteredList,
                     pageNumber: this.setPageNumber(nextProps.match.params.reference),
@@ -77,13 +77,15 @@ class PostsFeed extends Component {
     }
 
     render() {
-        cl(this.state.maxPageNumber);
+        // if (this.props.match.params.reference === "1")
+        //     return <Redirect to="/posts"/>;
+
         if(this.props.posts.length === 0)
             return  <section className="col-md-8">
                 <h2 className="page-header">Loading posts</h2>
-            </section>
+            </section>;
 
-        return(
+        else return(
             <section className="col-md-8">
                 <h2 className="page-header">Showing
                     <span> {this.postCount(this.state.filteredList).length} </span>

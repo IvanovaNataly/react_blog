@@ -7,10 +7,12 @@ import { postSelected } from "../actions/actionCreators";
 
 class PostPreview extends Component {
     renderTags(tag, i ) {
-        return <span key={i}>
-                <a href="#" className="label label-default"> {tag} </a>
-            </span>;
+        let tagit = tag.replace(" ", "-").toLowerCase();
 
+        return <span key={i}>
+                <NavLink to={{ pathname: '/posts', search: `?topic=${tagit}` }} className="label label-default" >{tag}
+                </NavLink>
+            </span>;
     }
 
     time(date) {
