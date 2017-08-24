@@ -1,8 +1,21 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import {browserHistory} from 'react-router';
 import moment  from "moment";
+import {withRouter} from "react-router";
+import { Route } from 'react-router-dom'
+
+const Button = () => (
+    <Route render={
+        ( {history}) => (
+        <td
+            type='button'
+            onClick={() => { history.push('/edit-post') }}
+        >
+name
+        </td>
+    )} />
+)
 
 class Admin extends Component {
 
@@ -10,17 +23,27 @@ class Admin extends Component {
         return moment.unix(date/1000).format("MMM DD, YYYY");
     }
 
+    handleClick(e)  {
+        this.router.transitionTo('index');
+    }
+
+
+
     renderPost(post,i) {
-        return <tr key={i} >
+        let td = new Button(this.props);
+        console.log(td);
 
-            {/*<NavLink to="/edit-post" activeClassName="active" className="navbar-brand">*/}
+        return td;
+        {/*<tr key={i}>*/}
 
-                <th scope="row" onClick={this.handleClick}>{i+1}</th>
-                <td>{post.title}</td>
-                <td>{post.author}</td>
-                <td>{this.time(post.date)}</td>
-            {/*</NavLink>*/}
-                </tr>
+
+
+                {/*<th scope="row">{i+1}</th>*/}
+                {/*<td>{post.title}</td>*/}
+                {/*<td>{post.author}</td>*/}
+                {/*<td>{this.time(post.date)}</td>*/}
+		//
+    // </tr>
     }
 
     render() {
@@ -65,4 +88,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, null)(Admin)
+export default  withRouter(connect(mapStateToProps, null)(Admin));

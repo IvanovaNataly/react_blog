@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PostPreview from './PostPreview.Component';
 import Pager from './Pager.Component';
+import {withRouter} from "react-router";
 
 const cl = console.log;
 
@@ -106,5 +107,5 @@ function mapStateToProps(state) {
     return { posts: state.posts }
 }
 
-export default connect(mapStateToProps, null)(PostsFeed)
+export default withRouter(connect(mapStateToProps, null)(PostsFeed));
 
