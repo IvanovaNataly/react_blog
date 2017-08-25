@@ -10,7 +10,7 @@ class EditPost extends Component {
         super(props);
         this.state = {
             postToEdit: {},
-            markup: ""
+            markdown: ""
         }
     }
 
@@ -24,8 +24,8 @@ class EditPost extends Component {
             });
 
             htmlService.getMarkup(postToEdit.mdPath)
-            .then( markup => {
-                this.setState({markup})
+            .then( markdown => {
+                this.setState({markdown})
             } )
 
             this.setState({postToEdit});
@@ -85,7 +85,7 @@ class EditPost extends Component {
                             <div className="form-group required col-sm-6">
                                 <label htmlFor="postMd">Markdown</label>
                                 <textarea className="form-control previewPane" id="postMd" name="postMd"
-                                          placeholder="Post Markdown" required="" value={this.state.markup} >
+                                          placeholder="Post Markdown" required="" value={this.state.markdown} >
                                 </textarea>
                             </div>
 
