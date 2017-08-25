@@ -10,8 +10,20 @@ class EditPost extends Component {
         super(props);
         this.state = {
             postToEdit: {},
-            markdown: ""
+            markdown: ''
         }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+
+    }
+
+    handleChange(event) {
+        this.setState({markdown: event.target.value});
+    }
+
+    handleSubmit(event) {
+        alert('An essay was submitted: ' + this.state.markdown);
+        event.preventDefault();
     }
 
     componentWillMount() {
@@ -44,7 +56,7 @@ class EditPost extends Component {
             <section className="col-md-12 edit-post">
                 <h2 className="page-header">Edit Post</h2>
 
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     <div className="row">
                         <div className="col-sm-6">
                             <div className="form-group required">
@@ -84,9 +96,9 @@ class EditPost extends Component {
                         <div className="row">
                             <div className="form-group required col-sm-6">
                                 <label htmlFor="postMd">Markdown</label>
-                                <textarea className="form-control previewPane" id="postMd" name="postMd"
-                                          placeholder="Post Markdown" required="" value={this.state.markdown} >
-                                </textarea>
+                                <textarea value={this.state.markdown} onChange={this.handleChange}
+                                          className="form-control previewPane" id="postMd" name="postMd"
+                                          placeholder="Post Markdown" required=""/>
                             </div>
 
                             <div className="col-sm-6">
@@ -98,9 +110,9 @@ class EditPost extends Component {
                             </div>
                         </div>
                         <hr></hr>
-
-                        <button type="submit" className="btn btn-primary">Save Post</button>
-                        <button type="button" className="btn btn-danger pull-right">Delete Post</button>
+                        <input type="submit" value="Submit" />
+                        {/*<button type="submit" className="btn btn-primary">Save Post</button>*/}
+                        {/*<button type="button" className="btn btn-danger pull-right">Delete Post</button>*/}
                 </form>
 
             </section>
