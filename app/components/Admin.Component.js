@@ -5,17 +5,8 @@ import moment  from "moment";
 import {withRouter} from "react-router";
 import { Route } from 'react-router-dom'
 
-const Button = () => (
-    <Route render={
-        ( {history}) => (
-        <td
-            type='button'
-            onClick={() => { history.push('/edit-post') }}
-        >
-name
-        </td>
-    )} />
-)
+
+
 
 class Admin extends Component {
 
@@ -23,27 +14,23 @@ class Admin extends Component {
         return moment.unix(date/1000).format("MMM DD, YYYY");
     }
 
-    handleClick(e)  {
-        this.router.transitionTo('index');
-    }
 
 
 
     renderPost(post,i) {
-        let td = new Button(this.props);
-        console.log(td);
-
-        return td;
-        {/*<tr key={i}>*/}
-
-
-
-                {/*<th scope="row">{i+1}</th>*/}
-                {/*<td>{post.title}</td>*/}
-                {/*<td>{post.author}</td>*/}
-                {/*<td>{this.time(post.date)}</td>*/}
-		//
-    // </tr>
+        const TR = () => (
+            <Route render={
+                ( {history}) => (
+                    <tr key={i} onClick={() => { history.push('/edit-post') }}>
+                        <th scope="row">{i+1}</th>
+                        <td>{post.title}</td>
+                        <td>{post.author}</td>
+                        <td>{this.time(post.date)}</td>
+                    </tr>
+                )} />
+        )
+        let tr = new TR();
+        return tr;
     }
 
     render() {
