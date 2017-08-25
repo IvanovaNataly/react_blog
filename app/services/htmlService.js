@@ -5,8 +5,15 @@ class HTMLService {
 
     getHTML(title) {
         return fetch(this.url + title + ".html")
-        .then(response => {
-            return response.text()
+            .then(response => {
+                return response.text()
+        })
+    }
+
+    getMarkup(mdPath) {
+        return fetch(mdPath)
+            .then(response => {
+                return response.text()
         })
     }
 }

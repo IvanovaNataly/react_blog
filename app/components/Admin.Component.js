@@ -1,12 +1,7 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import moment  from "moment";
-import {withRouter} from "react-router";
-import { Route } from 'react-router-dom'
-
-
-
 
 class Admin extends Component {
 
@@ -14,14 +9,12 @@ class Admin extends Component {
         return moment.unix(date/1000).format("MMM DD, YYYY");
     }
 
-
-
-
     renderPost(post,i) {
+        let reference = post.title.replace(" - ", "-").toLowerCase();
         const TR = () => (
             <Route render={
                 ( {history}) => (
-                    <tr key={i} onClick={() => { history.push('/edit-post') }}>
+                    <tr key={i} onClick={() => { history.push(`/edit-post?topic=${reference}`) }}>
                         <th scope="row">{i+1}</th>
                         <td>{post.title}</td>
                         <td>{post.author}</td>
@@ -75,4 +68,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default  withRouter(connect(mapStateToProps, null)(Admin));
+export default  connect(mapStateToProps, null)(Admin);

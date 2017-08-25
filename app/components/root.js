@@ -26,6 +26,7 @@ class Root extends Component {
             <Navigation/>
 
             <div className="row">
+                <Route exact path="/" component={Home} />
                 <Route path="/admin" component={Admin}/>
                 <Route path="/posts" component={PresentPostNavigation} />
                 <Route path="/article/:title" component={PostPage}/>

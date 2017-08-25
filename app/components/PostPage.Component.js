@@ -15,7 +15,6 @@ class PostPage extends Component {
 
     restoreTitle() {
         let title = this.props.match.params.title.replace("-", " - ");
-        cl(title);
         return title;
     }
 

@@ -24,7 +24,6 @@ class PostPreview extends Component {
     }
 
     onTitleClicked() {
-        console.log("clicked");
         this.props.onPostSelected(this.props.preview);
     }
 

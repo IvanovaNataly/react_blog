@@ -110,9 +110,9 @@ class Filter extends Component {
 }
 
 function mapStateToProps(state) {
-return {
-posts: state.posts
-}
+    return {
+        posts: state.posts
+    }
 }
 
 export default connect(mapStateToProps, null)(Filter);

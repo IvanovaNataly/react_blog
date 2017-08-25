@@ -1,27 +1,69 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+import htmlService from '../../services/htmlService';
+import Markdown from 'react-markdown';
 
-export default class EditPost extends Component {
+const cl = console.log;
+
+class EditPost extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            postToEdit: {},
+            markup: ""
+        }
+    }
+
+    componentWillMount() {
+        if (location.search) {
+            let locationArr = location.search.split("?")[1].split("=");
+
+            let postToEdit = this.props.posts.find(post => {
+                let name = post.title.replace(" - ", "-").toLowerCase();
+                return name === locationArr[1];
+            });
+
+            htmlService.getMarkup(postToEdit.mdPath)
+            .then( markup => {
+                this.setState({markup})
+            } )
+
+            this.setState({postToEdit});
+        }
+
+
+    }
+
+    componentDidMount() {
+
+    }
 
     render() {
+        let post = this.state.postToEdit;
         return (
             <section className="col-md-12 edit-post">
                 <h2 className="page-header">Edit Post</h2>
 
                 <form>
-
                     <div className="row">
                         <div className="col-sm-6">
-                            <div className="htmlForm-group required">
+                            <div className="form-group required">
                                 <label htmlFor="postTitle">Title</label>
-                                <input type="text" className="form-control" id="postTitle" name="postTitle" placeholder="Post Title" required="" autoFocus="" defaultValue="Grunt - Custom Tasks"/>
+                                <input type="text" className="form-control" id="postTitle"
+                                       name="postTitle" placeholder="Post Title" required="" autoFocus=""
+                                       defaultValue={post.title}/>
                             </div>
                             <div className="form-group required">
                                 <label htmlFor="postAuthor">Author</label>
-                                <input type="text" className="form-control" id="postAuthor" name="postAuthor" placeholder="Post Author" required="" defaultValue="Alex Ilyaev"/>
+                                <input type="text" className="form-control" id="postAuthor"
+                                       name="postAuthor" placeholder="Post Author" required=""
+                                       defaultValue={post.author}/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="postTags">Tags</label>
-                                <input type="text" className="form-control" id="postTags" name="postTags" placeholder="Post Tags" defaultValue="Grunt,Tools"/>
+                                <input type="text" className="form-control" id="postTags"
+                                       name="postTags" placeholder="Post Tags"
+                                       defaultValue={post.tags.join(", " ) }/>
 
                                     <p className="help-block">Separate multiple tags with a comma.
                                         e.g.<code>Grunt,Tools</code></p>
@@ -31,7 +73,8 @@ export default class EditPost extends Component {
                         <div className="col-sm-6">
                             <div className="form-group required">
                                 <label htmlFor="postDescription">Description</label>
-                                <textarea className="form-control" id="postDescription" name="postDescription" rows="10" placeholder="Post Description" required=""></textarea>
+                                <textarea className="form-control" id="postDescription" name="postDescription"
+                                          rows="10" placeholder="Post Description" required="" defaultValue={post.description}/>
                             </div>
                         </div>
                     </div>
@@ -41,10 +84,9 @@ export default class EditPost extends Component {
                         <div className="row">
                             <div className="form-group required col-sm-6">
                                 <label htmlFor="postMd">Markdown</label>
-
-                                <textarea className="form-control previewPane" id="postMd" name="postMd" rows="20" placeholder="Post Markdown" required="">
-
-							    </textarea>
+                                <textarea className="form-control previewPane" id="postMd" name="postMd"
+                                          placeholder="Post Markdown" required="" value={this.state.markup} >
+                                </textarea>
                             </div>
 
                             <div className="col-sm-6">
@@ -66,3 +108,13 @@ export default class EditPost extends Component {
         )
     }
 }
+
+
+function mapStateToProps(state) {
+    return{
+        posts: state.posts
+    }
+}
+
+export default  connect(mapStateToProps, null)(EditPost);
+
