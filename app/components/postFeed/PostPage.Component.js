@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import renderHTML from 'react-render-html';
-import htmlService from '../services/htmlService';
+import htmlService from '../../services/htmlService';
 import moment  from "moment";
 
 

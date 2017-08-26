@@ -6,6 +6,8 @@ export default function postReducer(state = [], action) {
             case ACTIONS.SET_POSTS_REQUEST:
                 return state;
             case ACTIONS.SET_POSTS_RESPONSE:
+                let postString = JSON.stringify(action.posts.posts);
+                localStorage.setItem("posts", postString);
                 return action.posts.posts;
     }
     return state;

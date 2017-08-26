@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import htmlService from '../../services/htmlService';
-import Markdown from 'react-markdown';
+import Input from "./Input.Component";
 
 const cl = console.log;
 
@@ -14,16 +14,6 @@ class EditPost extends Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-
-    }
-
-    handleChange(event) {
-        this.setState({markdown: event.target.value});
-    }
-
-    handleSubmit(event) {
-        alert('An essay was submitted: ' + this.state.markdown);
-        event.preventDefault();
     }
 
     componentWillMount() {
@@ -42,11 +32,19 @@ class EditPost extends Component {
 
             this.setState({postToEdit});
         }
-
-
     }
 
-    componentDidMount() {
+
+    handleChange(event) {
+        this.setState({markdown: event.target.value});
+    }
+
+    handleSubmit(event) {
+        alert('An essay was submitted: ' + this.state.markdown);
+        event.preventDefault();
+    }
+
+    handleInputSubmit(value) {
 
     }
 
@@ -59,12 +57,13 @@ class EditPost extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <div className="row">
                         <div className="col-sm-6">
-                            <div className="form-group required">
-                                <label htmlFor="postTitle">Title</label>
-                                <input type="text" className="form-control" id="postTitle"
-                                       name="postTitle" placeholder="Post Title" required="" autoFocus=""
-                                       defaultValue={post.title}/>
-                            </div>
+                            {/*<div className="form-group required">*/}
+                                {/*<label htmlFor="postTitle">Title</label>*/}
+                                {/*<input type="text" className="form-control" id="postTitle"*/}
+                                       {/*name="postTitle" placeholder="Post Title" required="" autoFocus=""*/}
+                                       {/*defaultValue={post.title}/>*/}
+                            {/*</div>*/}
+                            <Input name="Title" title={post.title}/>
                             <div className="form-group required">
                                 <label htmlFor="postAuthor">Author</label>
                                 <input type="text" className="form-control" id="postAuthor"
@@ -110,9 +109,8 @@ class EditPost extends Component {
                             </div>
                         </div>
                         <hr></hr>
-                        <input type="submit" value="Submit" />
-                        {/*<button type="submit" className="btn btn-primary">Save Post</button>*/}
-                        {/*<button type="button" className="btn btn-danger pull-right">Delete Post</button>*/}
+                    <button type="submit" value="Submit" className="btn btn-primary">Save Post</button>
+                    <button type="button" className="btn btn-danger pull-right">Delete Post</button>
                 </form>
 
             </section>

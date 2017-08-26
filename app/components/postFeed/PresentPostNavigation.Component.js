@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Route } from "react-router-dom";
 import PostsFeed from './PostsFeed.Component';
-import Search from "./Search.Component";
-import Filter from "./Filter.Component";
+import Search from "../sidebar/Search.Component";
+import Filter from "../sidebar/Filter.Component";
 // import Admin from "./Admin.Component";
 
 export default class PresentPostNavigation extends Component {

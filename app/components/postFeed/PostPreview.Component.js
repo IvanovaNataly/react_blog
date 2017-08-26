@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import moment  from "moment";
 
-import { postSelected } from "../actions/actionCreators";
+import { postSelected } from "../../actions/actionCreators";
 
 class PostPreview extends Component {
     renderTags(tag, i ) {
