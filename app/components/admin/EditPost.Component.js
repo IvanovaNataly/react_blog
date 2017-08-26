@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import htmlService from '../../services/htmlService';
+import postService from '../../services/postService';
 import Input from "./Input.Component";
 
 const cl = console.log;
@@ -40,8 +41,18 @@ class EditPost extends Component {
     }
 
     handleSubmit(event) {
-        alert('An essay was submitted: ' + this.state.markdown);
+        // alert('An essay was submitted: ' + this.state.markdown);
         event.preventDefault();
+
+        postService.editPost({
+            "title": "AngularJS - Modules",
+            "author": "Ilan Cohen New",
+            "date": "1421186400000",
+            "tags": ["JavaScript", "AngularJS"],
+            "mdPath": "data/posts/md/AngularJS - Modules.md",
+            "htmlPath": "data/posts/html/AngularJS - Modules.html",
+            "description": "You can think of a module as a container for the different parts of your app – controllers, services, filters, directives, etc. Most applications have a main method that instantiates and wires together the different parts of the application. Angular apps don't have a main method. Instead modules declaratively specify how an application should be bootstrapped."
+        })
     }
 
     handleInputSubmit(value) {

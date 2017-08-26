@@ -1,3 +1,5 @@
+const localStItem = "posts";
+
 
 class PostService {
     constructor() {
@@ -10,16 +12,21 @@ class PostService {
     }
 
     setLocalPosts(posts) {
-        localStorage.setItem("posts", JSON.stringify(posts));
+        localStorage.setItem(localStItem, JSON.stringify(posts));
     }
 
     getLocalPosts() {
-        return JSON.parse(localStorage.getItem("posts"));
+        return JSON.parse(localStorage.getItem(localStItem));
     }
-
-    editPost(post) {
-        let posts = localStorage
-    }
+	//
+    // editPost(editedPost) {
+    //     let posts = this.getLocalPosts();
+    //     let index = posts.findIndex(post => post.title === editedPost.title);
+    //     posts[index] = editedPost;
+    //     this.setLocalPosts(posts);
+	//
+    //     console.log(this.getLocalPosts());
+    // }
 }
 
 module.exports = new PostService();
