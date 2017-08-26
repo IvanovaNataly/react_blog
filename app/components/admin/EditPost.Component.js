@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import htmlService from '../../services/htmlService';
 import Input from "./Input.Component";
 import Markdown from "./Markdown.Component";
 import { editPosts } from "../../actions/actionCreators";
@@ -11,9 +10,9 @@ class EditPost extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            postToEdit: {},
-            markdown: ''
-        }
+                    postToEdit: {},
+                    onSubmit: false
+                }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -27,15 +26,15 @@ class EditPost extends Component {
                 return name === locationArr[1];
             });
 
-            htmlService.getMarkdown(postToEdit.mdPath)
-            .then( markdown => {
-                this.setState({markdown})
-            } )
-
-            this.setState({postToEdit});
+            this.setState( {postToEdit} );
         }
     }
 
+    onSubmit(propertyName, propertyValue) {
+        let postToEdit = this.state.postToEdit;
+        postToEdit[propertyName] = propertyValue;
+        this.setState({postToEdit});
+    }
 
     handleChange(event) {
         this.setState({[event.target.id]: event.target.value});
@@ -44,8 +43,9 @@ class EditPost extends Component {
     handleSubmit(event) {
         // alert('An essay was submitted: ' + this.state.markdown);
         event.preventDefault();
+        this.setState({onSubmit: true});
 
-        let previousPostTitle = this.state.postToEdit.title;
+        let previousPostTitle = this.state.title;
 
         let editedPost = {
             "title": "AngularJS - Modules - New",
@@ -58,7 +58,7 @@ class EditPost extends Component {
         }
 
 
-        this.props.editPosts(editedPost, previousPostTitle);
+        // this.props.editPosts(editedPost, previousPostTitle);
     }
 
 
@@ -114,7 +114,7 @@ class EditPost extends Component {
                                           {/*className="form-control previewPane" id="markdown" name="markdown"*/}
                                           {/*placeholder="Post Markdown" required=""/>*/}
                             {/*</div>*/}
-                            <Markdown markdown={this.state.markdown} mdPath={post.mdPath}/>
+                            <Markdown mdPath={post.mdPath} onSubmit={this.state.onSubmit} onSubmitCallback={this.onSubmit.bind(this)}/>
                             <div className="col-sm-6">
                                 <label>HTML Preview (read only)</label>
 

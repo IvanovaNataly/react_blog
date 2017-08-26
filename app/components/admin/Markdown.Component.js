@@ -21,19 +21,26 @@ export default class Markdown extends Component {
         } )
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.onSubmit && nextProps.onSubmit !== this.props.onSubmit) {
+            this.props.onSubmitCallback("markdown", this.state.markdown)
+        }
+    }
+
     handleChange(event) {
         this.setState({[event.target.id]: event.target.value});
     }
 
 
     render() {
-        cl(this.state);
         return (
                 <div className="form-group required col-sm-6">
                     <label htmlFor="markdown">Markdown</label>
                     <textarea value={this.state.markdown} onChange={this.handleChange}
                                 className="form-control previewPane" id="markdown" name="markdown"
                                 placeholder="Post Markdown"/>
+                    {/*<button className="btn btn-primary"*/}
+                            {/*onClick={this.props.onSubmitCallback({markdown: this.state.markdown})}>Save</button>*/}
                 </div>
 
         )
