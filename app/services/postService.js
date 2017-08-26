@@ -18,15 +18,14 @@ class PostService {
     getLocalPosts() {
         return JSON.parse(localStorage.getItem(localStItem));
     }
-	//
-    // editPost(editedPost) {
-    //     let posts = this.getLocalPosts();
-    //     let index = posts.findIndex(post => post.title === editedPost.title);
-    //     posts[index] = editedPost;
-    //     this.setLocalPosts(posts);
-	//
-    //     console.log(this.getLocalPosts());
-    // }
+
+    editPost(editedPost, previousPostTitle) {
+        let postsObj = this.getLocalPosts();
+        let index = postsObj.posts.findIndex(post => post.title === previousPostTitle);
+        postsObj.posts[index] = editedPost;
+        this.setLocalPosts(postsObj);
+        return postsObj;
+    }
 }
 
 module.exports = new PostService();

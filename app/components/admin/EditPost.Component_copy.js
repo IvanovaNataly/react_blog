@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import htmlService from '../../services/htmlService';
+import postService from '../../services/postService';
 import Input from "./Input.Component";
-import Markdown from "./Markdown.Component";
 import { editPosts } from "../../actions/actionCreators";
 
 const cl = console.log;
@@ -60,7 +60,7 @@ class EditPost extends Component {
 
         this.props.editPosts(editedPost, previousPostTitle);
     }
-
+    
 
     render() {
         cl(this.state);
@@ -108,13 +108,13 @@ class EditPost extends Component {
 
 
                         <div className="row">
-                            {/*<div className="form-group required col-sm-6">*/}
-                                {/*<label htmlFor="markdown">Markdown</label>*/}
-                                {/*<textarea value={this.state.markdown} onChange={this.handleChange}*/}
-                                          {/*className="form-control previewPane" id="markdown" name="markdown"*/}
-                                          {/*placeholder="Post Markdown" required=""/>*/}
-                            {/*</div>*/}
-                            <Markdown markdown={this.state.markdown} mdPath={post.mdPath}/>
+                            <div className="form-group required col-sm-6">
+                                <label htmlFor="markdown">Markdown</label>
+                                <textarea value={this.state.markdown} onChange={this.handleChange}
+                                          className="form-control previewPane" id="markdown" name="markdown"
+                                          placeholder="Post Markdown" required=""/>
+                            </div>
+
                             <div className="col-sm-6">
                                 <label>HTML Preview (read only)</label>
 

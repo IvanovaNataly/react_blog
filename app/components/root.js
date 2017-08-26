@@ -19,6 +19,7 @@ class Root extends Component {
         super(props);
         this.props.setPosts();
     }
+
     render() {
         return (
 
