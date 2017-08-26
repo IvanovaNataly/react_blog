@@ -1,14 +1,16 @@
 //import { combineReducers } from 'redux';
 import * as ACTIONS from '../actions/actions';
+import postService from '../services/postService';
 
 export default function postReducer(state = [], action) {
         switch(action.type) {
             case ACTIONS.SET_POSTS_REQUEST:
                 return state;
             case ACTIONS.SET_POSTS_RESPONSE:
-                let postString = JSON.stringify(action.posts.posts);
-                localStorage.setItem("posts", postString);
+                postService.setLocalPosts(action.posts.posts);
                 return action.posts.posts;
+            case ACTIONS.SET_POSTS_LOCAL:
+                return action.localPosts;
     }
     return state;
 }

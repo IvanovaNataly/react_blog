@@ -5,8 +5,20 @@ class PostService {
     }
 
     getPosts() {
-      return fetch(this.url)
-        .then(response => response.json())
+        return fetch(this.url)
+            .then(response => response.json())
+    }
+
+    setLocalPosts(posts) {
+        localStorage.setItem("posts", JSON.stringify(posts));
+    }
+
+    getLocalPosts() {
+        return JSON.parse(localStorage.getItem("posts"));
+    }
+
+    editPost(post) {
+        let posts = localStorage
     }
 }
 

@@ -25,7 +25,7 @@ class EditPost extends Component {
                 return name === locationArr[1];
             });
 
-            htmlService.getMarkup(postToEdit.mdPath)
+            htmlService.getMarkdown(postToEdit.mdPath)
             .then( markdown => {
                 this.setState({markdown})
             } )

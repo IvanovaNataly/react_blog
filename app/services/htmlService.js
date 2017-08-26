@@ -10,7 +10,7 @@ class HTMLService {
         })
     }
 
-    getMarkup(mdPath) {
+    getMarkdown(mdPath) {
         return fetch(mdPath)
             .then(response => {
                 return response.text()
