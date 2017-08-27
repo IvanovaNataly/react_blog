@@ -11,7 +11,7 @@ export default class Markdown extends Component {
     }
 
     componentWillMount() {
-        htmlService.getMarkdown(this.props.mdPath)
+        htmlService.getMarkdown(this.props.mdPath) //markdown is loaded from md file
         .then( markdown => {
             this.setState({markdown})
         } )
@@ -19,12 +19,12 @@ export default class Markdown extends Component {
 
     componentWillReceiveProps(nextProps) {
         if(nextProps.onSubmit && nextProps.onSubmit !== this.props.onSubmit) {
-            this.props.onSubmitCallback("markdown", this.state.markdown)
+            this.props.onSubmitCallback("markdown", this.state.markdown)  // transfers edited state to EditPost component
         }
     }
 
     handleChange(event) {
-        this.setState({[event.target.id]: event.target.value});
+        this.setState({[event.target.id]: event.target.value}); //records changes of input value to state
     }
 
     render() {

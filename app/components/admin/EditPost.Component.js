@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import Input from "./Input.Component";
 import Markdown from "./Markdown.Component";
 import { editPosts } from "../../actions/actionCreators";
+import moment  from "moment";
+
 
 const cl = console.log;
 
@@ -10,6 +12,7 @@ class EditPost extends Component {
     constructor(props) {
         super(props);
         this.state = {
+                    previousTitle: '',
                     postToEdit: {},
                     onSubmit: false
                 }
@@ -26,40 +29,26 @@ class EditPost extends Component {
                 return name === locationArr[1];
             });
 
-            this.setState( {postToEdit} );
+            this.setState( {postToEdit,
+                            previousTitle: postToEdit.title} );
         }
     }
 
-    onSubmit(propertyName, propertyValue) {
-        cl(propertyName);
+    onSubmit(propertyName, propertyValue) { //children components transfer edited values to the parent state
         let postToEdit = this.state.postToEdit;
         postToEdit[propertyName] = propertyValue;
         this.setState({postToEdit});
     }
 
-    handleChange(event) {
-        this.setState({[event.target.id]: event.target.value});
+    handleSubmit(event) {
+        event.preventDefault();
+        this.setState({onSubmit: true}); //just after click children components transfer edited values
+
+        setTimeout( () => this.props.editPosts(this.state.postToEdit, this.state.previousTitle), 0 ); //postToEdit is formed after all children components are rendered
     }
 
-    handleSubmit(event) {
-        // alert('An essay was submitted: ' + this.state.markdown);
-        event.preventDefault();
-        this.setState({onSubmit: true});
-
-        let previousPostTitle = this.state.title;
-
-        let editedPost = {
-            "title": "AngularJS - Modules - New",
-            "author": "Ilan Cohen Once More New",
-            "date": "1421186400000",
-            "tags": ["JavaScript", "AngularJS"],
-            "mdPath": "data/posts/md/AngularJS - Modules.md",
-            "htmlPath": "data/posts/html/AngularJS - Modules.html",
-            "description": "You can think of a module as a container for the different parts of your app – controllers, services, filters, directives, etc. Most applications have a main method that instantiates and wires together the different parts of the application. Angular apps don't have a main method. Instead modules declaratively specify how an application should be bootstrapped."
-        }
-
-
-        // this.props.editPosts(editedPost, previousPostTitle);
+    handleChange(event) {
+        this.setState({[event.target.id]: event.target.value});
     }
 
 
@@ -77,6 +66,7 @@ class EditPost extends Component {
                             <Input type="input" name="Title" value={post.title} onSubmit={this.state.onSubmit} onSubmitCallback={this.onSubmit.bind(this)}/>
 
                             <Input type="input" name="Author" value={post.author} onSubmit={this.state.onSubmit} onSubmitCallback={this.onSubmit.bind(this)}/>
+
                             <div className="form-group">
                                 <label htmlFor="postTags">Tags</label>
                                 <input type="text" className="form-control" id="postTags"
@@ -89,11 +79,6 @@ class EditPost extends Component {
                         </div>
 
                         <div className="col-sm-6">
-                            {/*<div className="form-group required">*/}
-                                {/*<label htmlFor="postDescription">Description</label>*/}
-                                {/*<textarea className="form-control" id="postDescription" name="postDescription"*/}
-                                          {/*rows="10" placeholder="Post Description" required="" defaultValue={post.description}/>*/}
-                            {/*</div>*/}
                             <Input type="textarea" name="Description" value={post.description} onSubmit={this.state.onSubmit} onSubmitCallback={this.onSubmit.bind(this)}/>
                         </div>
                     </div>
@@ -101,6 +86,7 @@ class EditPost extends Component {
 
                         <div className="row">
                             <Markdown mdPath={post.mdPath} onSubmit={this.state.onSubmit} onSubmitCallback={this.onSubmit.bind(this)}/>
+
                             <div className="col-sm-6">
                                 <label>HTML Preview (read only)</label>
                                 <div className="form-control previewPane">
