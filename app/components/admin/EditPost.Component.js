@@ -31,6 +31,7 @@ class EditPost extends Component {
     }
 
     onSubmit(propertyName, propertyValue) {
+        cl(propertyName);
         let postToEdit = this.state.postToEdit;
         postToEdit[propertyName] = propertyValue;
         this.setState({postToEdit});
@@ -72,19 +73,10 @@ class EditPost extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <div className="row">
                         <div className="col-sm-6">
-                            {/*<div className="form-group required">*/}
-                                {/*<label htmlFor="postTitle">Title</label>*/}
-                                {/*<input type="text" className="form-control" id="postTitle"*/}
-                                       {/*name="postTitle" placeholder="Post Title" required="" autoFocus=""*/}
-                                       {/*defaultValue={post.title}/>*/}
-                            {/*</div>*/}
-                            <Input name="Title" title={post.title}/>
-                            <div className="form-group required">
-                                <label htmlFor="author">Author</label>
-                                <input type="text" className="form-control" id="author"
-                                       name="author" placeholder="Post Author" required=""
-                                       value={this.state.author} onChange={this.handleChange}/>
-                            </div>
+
+                            <Input type="input" name="Title" value={post.title} onSubmit={this.state.onSubmit} onSubmitCallback={this.onSubmit.bind(this)}/>
+
+                            <Input type="input" name="Author" value={post.author} onSubmit={this.state.onSubmit} onSubmitCallback={this.onSubmit.bind(this)}/>
                             <div className="form-group">
                                 <label htmlFor="postTags">Tags</label>
                                 <input type="text" className="form-control" id="postTags"
@@ -97,29 +89,21 @@ class EditPost extends Component {
                         </div>
 
                         <div className="col-sm-6">
-                            <div className="form-group required">
-                                <label htmlFor="postDescription">Description</label>
-                                <textarea className="form-control" id="postDescription" name="postDescription"
-                                          rows="10" placeholder="Post Description" required="" defaultValue={post.description}/>
-                            </div>
+                            {/*<div className="form-group required">*/}
+                                {/*<label htmlFor="postDescription">Description</label>*/}
+                                {/*<textarea className="form-control" id="postDescription" name="postDescription"*/}
+                                          {/*rows="10" placeholder="Post Description" required="" defaultValue={post.description}/>*/}
+                            {/*</div>*/}
+                            <Input type="textarea" name="Description" value={post.description} onSubmit={this.state.onSubmit} onSubmitCallback={this.onSubmit.bind(this)}/>
                         </div>
                     </div>
                     <hr></hr>
 
-
                         <div className="row">
-                            {/*<div className="form-group required col-sm-6">*/}
-                                {/*<label htmlFor="markdown">Markdown</label>*/}
-                                {/*<textarea value={this.state.markdown} onChange={this.handleChange}*/}
-                                          {/*className="form-control previewPane" id="markdown" name="markdown"*/}
-                                          {/*placeholder="Post Markdown" required=""/>*/}
-                            {/*</div>*/}
                             <Markdown mdPath={post.mdPath} onSubmit={this.state.onSubmit} onSubmitCallback={this.onSubmit.bind(this)}/>
                             <div className="col-sm-6">
                                 <label>HTML Preview (read only)</label>
-
                                 <div className="form-control previewPane">
-
                                 </div>
                             </div>
                         </div>

@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
 import htmlService from '../../services/htmlService';
-import postService from '../../services/postService';
-import Input from "./Input.Component";
-import { editPosts } from "../../actions/actionCreators";
 
 const cl = console.log;
 
@@ -31,7 +27,6 @@ export default class Markdown extends Component {
         this.setState({[event.target.id]: event.target.value});
     }
 
-
     render() {
         return (
                 <div className="form-group required col-sm-6">
@@ -39,8 +34,6 @@ export default class Markdown extends Component {
                     <textarea value={this.state.markdown} onChange={this.handleChange}
                                 className="form-control previewPane" id="markdown" name="markdown"
                                 placeholder="Post Markdown"/>
-                    {/*<button className="btn btn-primary"*/}
-                            {/*onClick={this.props.onSubmitCallback({markdown: this.state.markdown})}>Save</button>*/}
                 </div>
 
         )
