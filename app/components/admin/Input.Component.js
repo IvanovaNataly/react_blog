@@ -27,6 +27,10 @@ export default class Input extends Component {
         this.setState({[event.target.id]: event.target.value}); //records changes of input value to state
     }
 
+    capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     render() {
         const nameString = this.state.name;
         const CustomTag = `${this.props.type}`; //custom tag to set input or textarea according to the props
@@ -34,7 +38,7 @@ export default class Input extends Component {
             <div className="form-group required">
                 <label htmlFor="postTitle">{this.props.name}</label>
                 <CustomTag type="text" className="form-control" id={nameString} rows="10"
-                       name={nameString} placeholder={nameString} required="" autoFocus=""
+                       name={nameString} placeholder={this.capitalizeFirstLetter(nameString)} required="" autoFocus=""
                        value={this.state[nameString]} onChange={this.handleChange}/>
             </div>
         )

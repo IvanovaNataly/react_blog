@@ -11,10 +11,14 @@ export default class Markdown extends Component {
     }
 
     componentWillMount() {
-        htmlService.getMarkdown(this.props.mdPath) //markdown is loaded from md file
-        .then( markdown => {
-            this.setState({markdown})
-        } )
+        if (this.props.mdPath === "Post Markdown")
+            this.setState({markdown : "Post Markdown"});//in case add post
+        else {
+            htmlService.getMarkdown(this.props.mdPath) // in case edit post markdown is loaded from md file
+            .then(markdown => {
+                this.setState({markdown})
+            })
+        }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -33,7 +37,7 @@ export default class Markdown extends Component {
                     <label htmlFor="markdown">Markdown</label>
                     <textarea value={this.state.markdown} onChange={this.handleChange}
                                 className="form-control previewPane" id="markdown" name="markdown"
-                                placeholder="Post Markdown"/>
+                                placeholder={this.state.markdown}/>
                 </div>
 
         )
