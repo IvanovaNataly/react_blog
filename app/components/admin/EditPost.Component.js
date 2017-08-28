@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import Input from "./Input.Component";
 import Markdown from "./Markdown.Component";
 import DeletePost from "./DeletePost.Component";
-import { editPosts } from "../../actions/actionCreators";
+import { editPosts, addPost } from "../../actions/actionCreators";
 
 const cl = console.log;
 
@@ -23,7 +23,6 @@ class EditPost extends Component {
     }
 
     componentWillMount() {
-        cl(location)
         let postToEdit = {};
         if  (location.pathname === "/add-post") {
             postToEdit = {
@@ -62,31 +61,33 @@ class EditPost extends Component {
         event.preventDefault();
         this.setState({onSubmit: "submitted"}); //just after click children components transfer edited values
 
-        if(this.state.addPost) {
-
-        }
-        else this.submitEdit();
-    }
-
-    submitEdit() {
         setTimeout( () => {
-            this.props.editPosts(this.state.postToEdit, this.state.previousTitle);
-            this.setState({onSubmit: "committed"});
-        }, 0 );                            //postToEdit is formed after all children components are rendered
+            if(this.state.addPost) {
+                this.props.addPost(this.state.postToEdit);
+            }
+            else this.props.editPosts(this.state.postToEdit, this.state.previousTitle);
+
+            this.setState({onSubmit: "committed"});  //postToEdit is formed after all children components are rendered
+        }, 0 );
     }
 
     setCurrentTime() {
         return Math.round((new Date()).getTime());
     }
 
+    setHeader() {
+        return (this.state.addPost ? "Add Post" : "Edit Post");
+    }
+
     render() {
         let post = this.state.postToEdit;
+
         if( this.state.onSubmit === "committed") {
             return <Redirect to="/admin"/>
         }
         else return (
             <section className="col-md-12 edit-post">
-                <h2 className="page-header">Edit Post</h2>
+                <h2 className="page-header"> {this.setHeader} </h2>
 
                 <form onSubmit={this.handleSubmit}>
                     <div className="row">
@@ -141,7 +142,8 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return { editPosts: (posts, previousPostTitle) => dispatch( editPosts(posts, previousPostTitle) ) }
+    return { editPosts: (posts, previousPostTitle) => dispatch( editPosts(posts, previousPostTitle) ),
+        addPost: (newPost) => dispatch( addPost(newPost) ) }
 }
 
 export default  connect(mapStateToProps, mapDispatchToProps)(EditPost);

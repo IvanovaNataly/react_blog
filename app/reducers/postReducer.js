@@ -11,6 +11,9 @@ export default function postReducer(state = [], action) {
                 return action.posts.posts;
             case ACTIONS.SET_POSTS_LOCAL:
                 return action.localPosts.posts;
+            case ACTIONS.ADD_POST:
+                postService.setLocalPosts({posts: [action.newPost, ...state]});
+                return [action.newPost, ...state]
     }
     return state;
 }

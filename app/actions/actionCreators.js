@@ -15,11 +15,15 @@ export function setPosts() {
   }
 }
 
+export function postSelected(post) {
+    return { type: ACTIONS.SET_SELECTED_POST, post}
+}
+
 export function editPosts(editedPost, previousPostTitle) {
     let localPosts = postService.editPost(editedPost, previousPostTitle);
     return {type: ACTIONS.SET_POSTS_LOCAL, localPosts}
 }
 
-export function postSelected(post) {
-    return { type: ACTIONS.SET_SELECTED_POST, post}
+export function addPost(newPost) {
+    return {type: ACTIONS.ADD_POST, newPost}
 }
