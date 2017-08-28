@@ -13,13 +13,8 @@ class PostPage extends Component {
         this.state = { page: "" };
     }
 
-    restoreTitle() {
-        let title = this.props.match.params.title.replace("-", " - ");
-        return title;
-    }
-
     componentDidMount() {
-        htmlService.getHTML(this.restoreTitle())
+        htmlService.getHTML(this.props.selectedPost.htmlPath)
             .then( page => {
                 this.setState({page});
             } )
@@ -33,7 +28,6 @@ class PostPage extends Component {
         return <span key={i}>
                 <a href="#" className="label label-default"> {tag} </a>
             </span>;
-
     }
 
     render() {

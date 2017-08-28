@@ -1,10 +1,10 @@
 class HTMLService {
     constructor() {
-        this.url = "../data/posts/html/";
+        this.url = "../";
     }
 
-    getHTML(title) {
-        return fetch(this.url + title + ".html")
+    getHTML(htmlPath) {
+        return fetch(this.url + htmlPath)
             .then(response => {
                 return response.text()
         })

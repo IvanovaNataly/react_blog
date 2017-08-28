@@ -35,6 +35,7 @@ class EditPost extends Component {
 
         else {
             let locationArr = location.search.split("?")[1].split("=");
+            cl (locationArr)
 
             postToEdit = this.props.posts.find(post => {
                 let name = post.title.replace(" - ", "-").toLowerCase();
@@ -76,7 +77,9 @@ class EditPost extends Component {
     }
 
     setHeader() {
-        return (this.state.addPost ? "Add Post" : "Edit Post");
+        if (this.state.addPost)
+            return "Add Post";
+        else return "Edit Post";
     }
 
     render() {
@@ -87,7 +90,7 @@ class EditPost extends Component {
         }
         else return (
             <section className="col-md-12 edit-post">
-                <h2 className="page-header"> {this.setHeader} </h2>
+                <h2 className="page-header"> {this.setHeader()} </h2>
 
                 <form onSubmit={this.handleSubmit}>
                     <div className="row">
@@ -97,15 +100,8 @@ class EditPost extends Component {
 
                             <Input type="input" name="Author" value={post.author} onSubmit={this.state.onSubmit} onSubmitCallback={this.onSubmit.bind(this)}/>
 
-                            <div className="form-group">
-                                <label htmlFor="postTags">Tags</label>
-                                <input type="text" className="form-control" id="postTags"
-                                       name="postTags" placeholder="Post Tags"
-                                       defaultValue={post.tags.join(", " ) }/>
+                            <Input type="input" name="Tags" value={post.tags} onSubmit={this.state.onSubmit} onSubmitCallback={this.onSubmit.bind(this)}/>
 
-                                    <p className="help-block">Separate multiple tags with a comma.
-                                        e.g.<code>Grunt,Tools</code></p>
-                            </div>
                         </div>
 
                         <div className="col-sm-6">

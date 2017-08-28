@@ -24,7 +24,11 @@ export default class Input extends Component {
     }
 
     handleChange(event) {
-        this.setState({[event.target.id]: event.target.value}); //records changes of input value to state
+        if(this.state.tags) {
+            let tagsArray = event.target.value.split(",");
+            this.setState({[event.target.id]: tagsArray})
+        }
+        else this.setState({[event.target.id]: event.target.value}); //records changes of input value to state
     }
 
     capitalizeFirstLetter(string) {
