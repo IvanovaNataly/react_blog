@@ -17,12 +17,16 @@ class PostsFeed extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        let filteredList = this.postFilter(nextProps.posts);
+        let filteredList = this.postFilter(nextProps.searchedPosts) || this.postFilter(nextProps.posts);
         this.setState({ filteredList: filteredList,
                     pageNumber: this.setPageNumber(nextProps.match.params.reference),
                     maxPageNumber: Math.ceil(filteredList.length/3)
                 });
+        if(nextProps.location.search !== this.props.location.search) {
+            this.setState({filteredList: this.postFilter(nextProps.posts)})
+        }
     }
+    //
 
     setPageNumber(pageNumber) {
         if(!pageNumber) {
@@ -79,7 +83,7 @@ class PostsFeed extends Component {
     render() {
         // if (this.props.match.params.reference === "1")
         //     return <Redirect to="/posts"/>;
-
+        cl(this.state)
         if(this.props.posts.length === 0)
             return (
                 <section className="col-md-8">
@@ -104,7 +108,8 @@ class PostsFeed extends Component {
 }
 
 function mapStateToProps(state) {
-    return { posts: state.posts }
+    return { posts: state.posts,
+            searchedPosts: state.searchedPosts}
 }
 
 export default withRouter(connect(mapStateToProps, null)(PostsFeed));

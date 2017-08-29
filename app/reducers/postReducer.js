@@ -1,4 +1,3 @@
-//import { combineReducers } from 'redux';
 import * as ACTIONS from '../actions/actions';
 import postService from '../services/postService';
 

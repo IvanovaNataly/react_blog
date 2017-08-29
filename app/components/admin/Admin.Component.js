@@ -58,10 +58,10 @@ class Admin extends Component {
     }
 
     toggleIcon(iconId) {
-        if(this.state.sortedBy == iconId) {
+        if(this.state.sortedBy === iconId) {
             return <i className="glyphicon glyphicon-chevron-down"></i>
         }
-        else if(this.state.sortedBy == iconId + "-desc")
+        else if(this.state.sortedBy === iconId + "-desc")
             return <i className="glyphicon glyphicon-chevron-up"></i>
     }
 

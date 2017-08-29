@@ -83,6 +83,7 @@ class EditPost extends Component {
     }
 
     render() {
+        cl(this.state)
         let post = this.state.postToEdit;
 
         if( this.state.onSubmit === "committed") {

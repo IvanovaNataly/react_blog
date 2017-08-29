@@ -5,6 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 const state = {
     posts: [],
+    searchedPosts: [],
     selectedPost: {}
 };
 

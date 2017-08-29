@@ -4,11 +4,8 @@ import { connect } from 'react-redux';
 import {withRouter} from "react-router";
 
 import { setPosts } from '../actions/actionCreators';
-import PostsFeed from './postFeed/PostsFeed.Component';
 import Navigation from "./navigation/Navigation.Component";
 import Admin from "./admin/Admin.Component";
-import Search from "./sidebar/Search.Component";
-import Filter from "./sidebar/Filter.Component";
 import Home from "./home/Home.Component";
 import PostPage from "./postFeed/PostPage.Component";
 import PresentPostNavigation from "./postFeed/PresentPostNavigation.Component";
