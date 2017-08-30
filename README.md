@@ -6,5 +6,5 @@ Run `npm install` and then `webpack-dev-server`
 
 ## ToDo
 - node server and mongo db
-- delete button on edit post page
+- delete post (delet button on edit post page currently with no onClick)
 
