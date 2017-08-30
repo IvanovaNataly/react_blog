@@ -55,12 +55,12 @@ class DeletePost extends Component {
 
     render() {
         if ( this.props.addPost )
-            return (
+            return <span></span>;
+        else return (
                 <span>
                     <button type="button" className="btn btn-danger pull-right">Delete Post</button>
                 </span>
-        );
-        else return <span></span>;
+            )
     }
 }
 
