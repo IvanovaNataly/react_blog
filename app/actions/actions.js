@@ -3,4 +3,3 @@ export const SET_POSTS_REQUEST = "setPostsRequest";
 export const SET_POSTS_LOCAL = "setPostsLocal";
 export const SET_SELECTED_POST = "setSelectedPage";
 export const ADD_POST = "addPost";
-export const SET_SEARCH_POSTS = "setSearchPosts";

@@ -17,7 +17,7 @@ class PostsFeed extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        let filteredList = this.postFilter(nextProps.searchedPosts) || this.postFilter(nextProps.posts);
+        let filteredList = this.postFilter(nextProps.posts);
         this.setState({ filteredList: filteredList,
                     pageNumber: this.setPageNumber(nextProps.match.params.reference),
                     maxPageNumber: Math.ceil(filteredList.length/3)
@@ -26,7 +26,7 @@ class PostsFeed extends Component {
             this.setState({filteredList: this.postFilter(nextProps.posts)})
         }
     }
-    //
+    //this.postFilter(nextProps.searchedPosts) ||
 
     setPageNumber(pageNumber) {
         if(!pageNumber) {
@@ -68,6 +68,16 @@ class PostsFeed extends Component {
                         return tagsArr.length > 0;
                     });
                     return postToRepresent;
+                case ("search"):
+                    postToRepresent = posts.filter( post => {
+                        let param = post.title.toLowerCase()
+                            + " " + post.author.toLowerCase()
+                            + " " + post.description.toLowerCase()
+                            + " " + post.tags.join(" ").toLowerCase();
+
+                        return param.indexOf(locationValue.toLowerCase()) > -1;
+                    })
+                    return postToRepresent;
             }
         }
         else return posts;
@@ -83,7 +93,6 @@ class PostsFeed extends Component {
     render() {
         // if (this.props.match.params.reference === "1")
         //     return <Redirect to="/posts"/>;
-        cl(this.state)
         if(this.props.posts.length === 0)
             return (
                 <section className="col-md-8">

@@ -28,6 +28,3 @@ export function addPost(newPost) {
     return {type: ACTIONS.ADD_POST, newPost}
 }
 
-export function setSearch(posts) {
-    return {type: ACTIONS.SET_SEARCH_POSTS, posts}
-}

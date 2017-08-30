@@ -54,7 +54,7 @@ class Admin extends Component {
         })
 
         this.setState({posts,
-                        sortedBy: this.state.sortedBy === sortBy ? sortBy + "-desc" : sortBy})
+            sortedBy: this.state.sortedBy === sortBy ? sortBy + "-desc" : sortBy})
     }
 
     toggleIcon(iconId) {
@@ -74,27 +74,27 @@ class Admin extends Component {
                 <h2 className="page-header">Edit posts</h2>
                 <table className="table table-bordered table-hover table-striped postsTable">
                     <thead>
-                        <tr>
-                            <th>#</th>
-                            <th id="title" onClick={this.sort}>
-                                Title
-                                <span className="pull-right">
+                    <tr>
+                        <th>#</th>
+                        <th id="title" onClick={this.sort}>
+                            Title
+                            <span className="pull-right">
                                     {this.toggleIcon("title")}
                                 </span>
-                            </th>
-                            <th id="author" onClick={this.sort}>
-                                Author
-                                <span className="pull-right">
+                        </th>
+                        <th id="author" onClick={this.sort}>
+                            Author
+                            <span className="pull-right">
                                     {this.toggleIcon("author")}
                                 </span>
-                            </th>
-                            <th id="date" onClick={this.sort}>
-                                Date
-                                <span className="pull-right">
+                        </th>
+                        <th id="date" onClick={this.sort}>
+                            Date
+                            <span className="pull-right">
                                      {this.toggleIcon("date")}
                                 </span>
-                            </th>
-                        </tr>
+                        </th>
+                    </tr>
                     </thead>
                     <tbody>
                         { this.state.posts.map( this.renderPost.bind(this) ) }

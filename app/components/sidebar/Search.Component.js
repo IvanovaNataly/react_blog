@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Route } from "react-router-dom";
 import { connect } from 'react-redux';
 import {withRouter} from "react-router";
 import { setSearch } from '../../actions/actionCreators';
@@ -9,7 +10,8 @@ class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {data: props.posts,
-                    filteredData: props.posts}
+                    filteredData: props.posts};
+        this.renderSearchInput = this.renderSearchInput.bind(this);
     }
 
     setFilteredList(value) {
@@ -25,19 +27,28 @@ class Search extends Component {
         this.props.setSearch({posts: filtered});
     }
 
+    renderSearchInput() {
+        const SearchField = () => (
+            <Route render={
+                ( {history}) => (
+                    <input onChange={(event) => {
+                        let e = event.target.value;
+                        history.push(`/posts?search=${e}`)
+                    }} type="search" name="search" className="form-control" placeholder="Type Your Query">
+                    </input>
+                )} />
+        )
+        return new SearchField();
+    }
+
     render() {
         return (
-
             <div className="well">
                 <h4>Search</h4>
 
                 <form>
                     <div className="input-group">
-                        <input type="search" name="search" className="form-control"
-                               placeholder="Type Your Query"
-
-                                onChange={ (event) => this.setFilteredList(event.target.value) }></input>
-
+                        {this.renderSearchInput()}
                         <span className="input-group-btn">
                             <button className="btn btn-default" type="submit">
                                 <span className="glyphicon glyphicon-search"></span>
@@ -55,8 +66,4 @@ function mapStateToProps(state) {
     return { posts: state.posts }
 }
 
-function mapDispatchToProps(dispatch) {
-    return { setSearch: (posts) => dispatch( setSearch(posts) ) }
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));
+export default withRouter(connect(mapStateToProps)(Search));
