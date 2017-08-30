@@ -2,8 +2,9 @@
 
 ## Init
 
-Run `npm install` and then `npm start`
+Run `npm install` and then `webpack-dev-server`
 
-## Instructions
+## ToDo
+- node server and mongo db
+- delete button on edit post page
 
-Open README.html in the browser
