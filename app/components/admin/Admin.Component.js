@@ -66,9 +66,6 @@ class Admin extends Component {
     }
 
     render() {
-        console.log(this.state)
-
-
         return (
             <section className="col-md-8">
                 <h2 className="page-header">Edit posts</h2>

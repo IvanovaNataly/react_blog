@@ -35,7 +35,6 @@ class EditPost extends Component {
 
         else {
             let locationArr = location.search.split("?")[1].split("=");
-            cl (locationArr)
 
             postToEdit = this.props.posts.find(post => {
                 let name = post.title.replace(" - ", "-").toLowerCase();
@@ -83,7 +82,6 @@ class EditPost extends Component {
     }
 
     render() {
-        cl(this.state)
         let post = this.state.postToEdit;
 
         if( this.state.onSubmit === "committed") {
